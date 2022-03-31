@@ -1600,12 +1600,6 @@ p.no-result {
 #flip-card .buttons .message {
   margin: 0;
 }
-#end img {
-  display: block;
-  width: 15%;
-  margin: auto;
-  padding-top: 2rem;
-}
 .highlight {
   color: #d1d9e1;
   background: #474949;
