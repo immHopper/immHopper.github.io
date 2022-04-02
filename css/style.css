@@ -1734,4 +1734,5 @@ body {
 #chartdiv {
   width: 100%;
   height: 350px;
+  margin-left: -7rem;
 }
