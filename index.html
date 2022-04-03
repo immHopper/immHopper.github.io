@@ -94,19 +94,6 @@
 <!--   </section> -->
 
 
-<section id="about">
-  
-  <p style="display: inline">
-    
-      Find me on
-      <ul id="sociallinks">
-        
-          <li><a class="icon" target="_blank" href="https://github.com/imhopper" title="github"><i class="fa fa-github"></i></a></li>
-        
-      </ul>.
-    
-  </p>
-</section>
 
 
 
@@ -114,9 +101,103 @@
 
 
 
-<img src="https://s2.loli.net/2022/03/31/uKmtLqMG6QO5kBf.jpg" alt="ethereum-node-web-29d559dc69ad1f0c573df037f0210bcbfa7459b36e2690e2791641c3932ae091.jpg" height='300' width='400' />
+
+<!-- <img src="https://s2.loli.net/2022/03/31/uKmtLqMG6QO5kBf.jpg" alt="ethereum-node-web-29d559dc69ad1f0c573df037f0210bcbfa7459b36e2690e2791641c3932ae091.jpg" height='300' width='400' /> -->
 
 
+
+
+
+
+
+
+
+<div class="jumbotron bg-transparent mb-0 radius-0">
+  <div class="container">
+      <div class="row">
+        <div class="col-xl-6">
+          <h1 class="display-2">iam<span class="vim-caret">Hopper</span></h1>
+          <div class="lead mb-3 text-mono text-success">"That's all for now. I hope I managed to prove that exploiting buffer overflows should be an art."</div>
+          <section id="about">
+            
+            <p style="display: inline">
+              
+                Find me on
+                <ul id="sociallinks">
+                  
+                    <li><a class="icon" target="_blank" href="https://github.com/imhopper" title="github"><i class="fa fa-github"></i></a></li>
+                  
+                </ul>.
+              
+            </p>
+          </section>
+
+
+
+          <br>
+          <hr style="border-color:gray">
+          <div class="console">
+
+              <p class="line1 console_line"><span style="color:#17b06b">imhopper@xps:~/hack_the_world$</span> gdb ./binary<span class="cursor1 cursor-type"> _</span></p>
+
+              
+              <p class="line2 console_line">GNU gdb (Ubuntu 8.2-0ubuntu1~16.04.1) 8.2</p>
+              <p class="line3 console_line">For help, type "help".</span></p>
+              
+              <p class="line4 console_line"><span style="color:#ff707f">gdb-peda$</span> r<span class="cursor2 cursor-type"> _</span></p>
+
+              <p class="wait_crash console_line"></p>
+
+              <p class="line5 console_line">Starting program: /home/hack_the_world/binary </p>
+              <p class="line6 console_line">> Enter Secret Code: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+              <p class="line7 console_line">Program received signal SIGSEGV, Segmentation fault.</p>
+              <p class="line8 dump_line crash_dump"><span style="color: #5c94ff">[----------------------------------registers-----------------------------------]</span></p>
+              <p class="line9 dump_line crash_dump"><span style="color: #17b06b">RAX:</span> 0x0 </p>
+              <p class="line10 dump_line crash_dump"><span style="color: #17b06b">RBX:</span> 0x0 </p>
+              <p class="line11 dump_line crash_dump"><span style="color: #17b06b">RCX:</span> <span style="color:#ff707f">0x7f2f402a82c0</span> (<__write_nocancel+7>:	cmp    rax,0xfffffffffffff001)</p>
+              <p class="line12 dump_line crash_dump"><span style="color: #17b06b">RDX:</span> <span style="color: #5c94ff">0x7f2f40577780</span> --> 0x0 </p>
+              <p class="line13 dump_line crash_dump"><span style="color: #17b06b">RSI:</span> <span style="color: #5c94ff">0x7fff3fbe72a0</span> ("Nice to meet you, ", 'A' <repeats 94 times>, "!\n")</p>
+              <p class="line14 dump_line crash_dump"><span style="color: #17b06b">RDI:</span> 0x1 </p>
+              <p class="line15 dump_line crash_dump"><span style="color: #17b06b">RBP:</span> 0x4141414141414141 ('AAAAAAAA')</p>
+              <p class="line16 dump_line crash_dump"><span style="color: #17b06b">RSP:</span> 0x7fff3fbe9958 ('A' <repeats 54 times>)</p>
+              <p class="line17 dump_line crash_dump"><span style="color: #17b06b">RIP:</span> <span style="color:#ff707f">0x4012dd</span> (<main+324>:	ret)</p>
+              <p class="line18 dump_line crash_dump"><span style="color: #17b06b">R8 :</span> <span style="color: #5c94ff">0x7f2f4076c700</span> (0x00007f2f4076c700)</p>
+              <p class="line19 dump_line crash_dump"><span style="color: #17b06b">R9 :</span> 0x72 ('r')</p>
+              <p class="line20 dump_line crash_dump"><span style="color: #17b06b">R10:</span> 0x5e ('^')</p>
+              <p class="line21 dump_line crash_dump"><span style="color: #17b06b">R11:</span> 0x246 </p>
+              <p class="line22 dump_line crash_dump"><span style="color: #17b06b">R12:</span> <span style="color:#ff707f">0x4010a0</span> (<_start>:	endbr64)</p>
+              <p class="line23 dump_line crash_dump"><span style="color: #17b06b">R13:</span> <span style="color: #5c94ff">0x7fff3fbe9a30</span> --> 0x1 </p>
+              <p class="line24 dump_line crash_dump"><span style="color: #17b06b">R14:</span> 0x0 </p>
+              <p class="line25 dump_line crash_dump"><span style="color: #17b06b">R15:</span> 0x0</p>
+              <p class="line26 dump_line crash_dump"><span style="color: #17b06b">EFLAGS:</span> 0x10206 (<span style="color: #17b06b">carry</span> <span style="color:#ff707f">PARITY</span> <span style="color: #17b06b">adjust zero sign trap</span> <span style="color:#ff707f">INTERRUPT</span> <span style="color: #17b06b">direction overflow</span>)</p>
+              <p class="line27 dump_line crash_dump"><span style="color: #5c94ff">[-------------------------------------code-------------------------------------]</span></p>
+              <p class="line28 dump_line crash_dump">  0x4012d2 <main+313>:	<span style="color:#ff707f">call   0x401060 <printf@plt></span></p>
+              <p class="line29 dump_line crash_dump">  0x4012d7 <main+318>:	mov    eax,0x0</p>
+              <p class="line30 dump_line crash_dump">  0x4012dc <main+323>:	leave  </p>
+              <p class="line31 dump_line crash_dump">=> 0x4012dd <main+324>:	<span style="color: #5c94ff">ret</span>    </p>
+              <p class="line32 dump_line crash_dump">  0x4012de:	xchg   ax,ax</p>
+              <p class="line33 dump_line crash_dump">  0x4012e0 <__libc_csu_init>:	endbr64 </p>
+              <p class="line34 dump_line crash_dump">  0x4012e4 <__libc_csu_init+4>:	push   r15</p>
+              <p class="line35 dump_line crash_dump">  0x4012e6 <__libc_csu_init+6>:	lea    r15,[rip+0x2b13]        # 0x403e00</p>
+              <p class="line36 dump_line crash_dump"><span style="color: #5c94ff">[------------------------------------stack-------------------------------------]</span></p>
+              <p class="line37 dump_line crash_dump">0000| <span style="color: #5c94ff">0x7fff3fbe9958</span> ('A' repeats 54 times)</p>
+              <p class="line38 dump_line crash_dump">0008| <span style="color: #5c94ff">0x7fff3fbe9960</span> ('A' repeats 46 times)</p>
+              <p class="line39 dump_line crash_dump">0016| <span style="color: #5c94ff">0x7fff3fbe9968</span> ('A' repeats 38 times)</p>
+              <p class="line40 dump_line crash_dump">0024| <span style="color: #5c94ff">0x7fff3fbe9970</span> ('A' repeats 30 times)</p>
+              <p class="line41 dump_line crash_dump">0032| <span style="color: #5c94ff">0x7fff3fbe9978</span> ('A' repeats 22 times)</p>
+              <p class="line42 dump_line crash_dump">0040| <span style="color: #5c94ff">0x7fff3fbe9980</span> ('A' repeats 14 times)</p>
+              <p class="line43 dump_line crash_dump">0048| <span style="color: #5c94ff">0x7fff3fbe9988</span> --> 0xd500414141414141 </p>
+              <p class="line44 dump_line crash_dump">0056| <span style="color: #5c94ff">0x7fff3fbe9990</span> --> <span style="color:#ff707f">0x4010a0</span> (<_start>:	endbr64)</p>
+              <p class="line45 dump_line crash_dump"><span style="color: #5c94ff">[------------------------------------------------------------------------------]</span></p>
+              <p class="line46 dump_line crash_dump">Legend: <span style="color:#ff707f">code</span>, data, <span style="color: #17b06b">rodata</span>, value</p>
+              <p class="line47 dump_line crash_dump">Stopped reason: <span style="color:#ff707f">SIGSEGV</span></p>
+              <p class="line48 dump_line crash_dump">0x00000000004012dd in main ()</p>
+              <p class="line49 console_line"><span style="color:#ff707f">gdb-peda$</span> <span class="cursor3 cursor-type"> _</span></p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
 
 
 <section id="writing">
@@ -126,9 +207,9 @@
 
 
 
-
-
-
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 
 
 
