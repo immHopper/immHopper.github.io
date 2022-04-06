@@ -7,9 +7,9 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta property="og:type" content="website">
-<meta property="og:title" content="iamHopper&#39;s Blog">
+<meta property="og:title">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="iamHopper&#39;s Blog">
+<meta property="og:site_name">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Powered by Hopper">
 <meta name="twitter:card" content="summary">
@@ -32,7 +32,7 @@
         
     
     <!-- title -->
-    <title>iamHopper&#39;s Blog</title>
+    <title></title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -54,9 +54,19 @@
     
   
     <div id="title">
-      <h1>iamHopper&#39;s Blog</h1>
+      <h1></h1>
     </div>
   </a>
+  <div class="jumbotron bg-transparent mb-0 radius-0">
+    <div class="container">
+        <div class="row">
+          <div class="col-xl-6">
+            <h1 class="display-2">iam<span class="vim-caret">Hopper</span></h1>
+          </div>
+        </div>
+    </div>
+  </div> 
+
   <div id="nav">
     <ul>
       <li class="icon">
@@ -74,24 +84,24 @@
 </header>
 
         
-        <!--   <section> -->
-<!--   <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/typed.js"></script> -->
-<!--   <strong id="typedjs1"></strong> -->
-<!--   <script> -->
-<!--   var typed = new Typed("#typedjs1", { -->
-<!--     strings: [ -->
-<!--     'We cannot have all things to please us, <br/>no mater how we try.<br/><br/> —— Hell on Wheels' -->
-<!--     ], -->
-<!--     startDelay: 0, -->
-<!--     typeSpeed: 14, -->
-<!--     backSpeed: 14, -->
-<!--     loop: false, -->
-<!--     showCursor: true, -->
-<!--     shuffle: false, -->
-<!--     cursorChar: ' |', -->
-<!--   }); -->
-<!--   </script> -->
-<!--   </section> -->
+        <!-- <section> 
+<script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/typed.js"></script>
+<strong id="typedjs1"></strong>
+<script>
+var typed = new Typed("#typedjs1", { 
+  strings: [
+  'We cannot have all things to please us, <br/>no mater how we try.<br/><br/> —— Hell on Wheels' 
+  ], 
+  startDelay: 0, 
+  typeSpeed: 14, 
+  backSpeed: 14, 
+  loop: false, 
+  showCursor: true, 
+  shuffle: false,
+  cursorChar: ' |', 
+}); 
+</script> 
+</section> -->
 
 
 <section id="about">
@@ -117,13 +127,37 @@
   <div class="container">
       <div class="row">
         <div class="col-xl-6">
-          <h1 class="display-2">iam<span class="vim-caret">Hopper</span></h1>
-          <div class="lead mb-3 text-mono text-success">"That's all for now. I hope I managed to prove that exploiting buffer overflows should be an art."</div>
+          <h1 class="display-2"><span class="vim-caret"></span>
+
+            <section> 
+              <script src="https://cdn.jsdelivr.net/gh/Justlovesmile/CDN/js/typed.js"></script>
+              <strong id="typedjs1"></strong>
+              <script>
+              var typed = new Typed("#typedjs1", { 
+                strings: [
+                'We cannot have all things to please us, <br/>no mater how we try.<br/><br/> —— Hell on Wheels' 
+                ], 
+                startDelay: 0, 
+                typeSpeed: 14, 
+                backSpeed: 14, 
+                loop: false, 
+                showCursor: true, 
+                shuffle: false,
+                cursorChar: ' |', 
+              }); 
+              </script> 
+              </section>
+          
+          
+          
+          
+          </h1>
+          <!-- <div class="lead mb-3 text-mono text-success">"That's all for now. I hope I managed to prove that exploiting buffer overflows should be an art."</div> -->
           <br>
-          <hr style="border-color:gray">
+          <!-- <hr style="border-color:gray"> -->
           <div class="console">
 
-              <p class="line1 console_line"><span style="color:#17b06b">imhopper@xps:~/hack_the_world$</span> gdb ./binary<span class="cursor1 cursor-type"> _</span></p>
+              <!-- <p class="line1 console_line"><span style="color:#17b06b">imhopper@xps:~/hack_the_world$</span> gdb ./binary<span class="cursor1 cursor-type"> _</span></p>
 
               
               <p class="line2 console_line">GNU gdb (Ubuntu 8.2-0ubuntu1~16.04.1) 8.2</p>
@@ -131,16 +165,16 @@
               
               <p class="line4 console_line"><span style="color:#ff707f">gdb-peda$</span> r<span class="cursor2 cursor-type"> _</span></p>
 
-              <p class="wait_crash console_line"></p>
+              <p class="wait_crash console_line"></p> -->
 
-              <p class="line5 console_line">Starting program: /home/hack_the_world/binary </p>
+              <!-- <p class="line5 console_line">Starting program: /home/hack_the_world/binary </p>
               <p class="line6 console_line">> Enter Secret Code: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
               <p class="line7 console_line">Program received signal SIGSEGV, Segmentation fault.</p>
               <p class="line8 dump_line crash_dump"><span style="color: #5c94ff">[----------------------------------registers-----------------------------------]</span></p>
               <p class="line9 dump_line crash_dump"><span style="color: #17b06b">RAX:</span> 0x0 </p>
               <p class="line10 dump_line crash_dump"><span style="color: #17b06b">RBX:</span> 0x0 </p>
               <p class="line11 dump_line crash_dump"><span style="color: #17b06b">RCX:</span> <span style="color:#ff707f">0x7f2f402a82c0</span> (<__write_nocancel+7>:	cmp    rax,0xfffffffffffff001)</p>
-              <p class="line12 dump_line crash_dump"><span style="color: #17b06b">RDX:</span> <span style="color: #5c94ff">0x7f2f40577780</span> --> 0x0 </p>
+              <p class="line12 dump_line crash_dump"><span style="color: #17b06b">RDX:</span> <span style="color: #5c94ff">0x7f2f40577780</span> 0x0 </p> 
               <p class="line13 dump_line crash_dump"><span style="color: #17b06b">RSI:</span> <span style="color: #5c94ff">0x7fff3fbe72a0</span> ("Nice to meet you, ", 'A' <repeats 94 times>, "!\n")</p>
               <p class="line14 dump_line crash_dump"><span style="color: #17b06b">RDI:</span> 0x1 </p>
               <p class="line15 dump_line crash_dump"><span style="color: #17b06b">RBP:</span> 0x4141414141414141 ('AAAAAAAA')</p>
@@ -151,7 +185,7 @@
               <p class="line20 dump_line crash_dump"><span style="color: #17b06b">R10:</span> 0x5e ('^')</p>
               <p class="line21 dump_line crash_dump"><span style="color: #17b06b">R11:</span> 0x246 </p>
               <p class="line22 dump_line crash_dump"><span style="color: #17b06b">R12:</span> <span style="color:#ff707f">0x4010a0</span> (<_start>:	endbr64)</p>
-              <p class="line23 dump_line crash_dump"><span style="color: #17b06b">R13:</span> <span style="color: #5c94ff">0x7fff3fbe9a30</span> --> 0x1 </p>
+              <p class="line23 dump_line crash_dump"><span style="color: #17b06b">R13:</span> <span style="color: #5c94ff">0x7fff3fbe9a30</span>  0x1 </p>
               <p class="line24 dump_line crash_dump"><span style="color: #17b06b">R14:</span> 0x0 </p>
               <p class="line25 dump_line crash_dump"><span style="color: #17b06b">R15:</span> 0x0</p>
               <p class="line26 dump_line crash_dump"><span style="color: #17b06b">EFLAGS:</span> 0x10206 (<span style="color: #17b06b">carry</span> <span style="color:#ff707f">PARITY</span> <span style="color: #17b06b">adjust zero sign trap</span> <span style="color:#ff707f">INTERRUPT</span> <span style="color: #17b06b">direction overflow</span>)</p>
@@ -171,19 +205,18 @@
               <p class="line40 dump_line crash_dump">0024| <span style="color: #5c94ff">0x7fff3fbe9970</span> ('A' repeats 30 times)</p>
               <p class="line41 dump_line crash_dump">0032| <span style="color: #5c94ff">0x7fff3fbe9978</span> ('A' repeats 22 times)</p>
               <p class="line42 dump_line crash_dump">0040| <span style="color: #5c94ff">0x7fff3fbe9980</span> ('A' repeats 14 times)</p>
-              <p class="line43 dump_line crash_dump">0048| <span style="color: #5c94ff">0x7fff3fbe9988</span> --> 0xd500414141414141 </p>
-              <p class="line44 dump_line crash_dump">0056| <span style="color: #5c94ff">0x7fff3fbe9990</span> --> <span style="color:#ff707f">0x4010a0</span> (<_start>:	endbr64)</p>
+              <p class="line43 dump_line crash_dump">0048| <span style="color: #5c94ff">0x7fff3fbe9988</span>  0xd500414141414141 </p>
+              <p class="line44 dump_line crash_dump">0056| <span style="color: #5c94ff">0x7fff3fbe9990</span> <span style="color:#ff707f">0x4010a0</span> (<_start>:	endbr64)</p>
               <p class="line45 dump_line crash_dump"><span style="color: #5c94ff">[------------------------------------------------------------------------------]</span></p>
               <p class="line46 dump_line crash_dump">Legend: <span style="color:#ff707f">code</span>, data, <span style="color: #17b06b">rodata</span>, value</p>
               <p class="line47 dump_line crash_dump">Stopped reason: <span style="color:#ff707f">SIGSEGV</span></p>
               <p class="line48 dump_line crash_dump">0x00000000004012dd in main ()</p>
-              <p class="line49 console_line"><span style="color:#ff707f">gdb-peda$</span> <span class="cursor3 cursor-type"> _</span></p>
-          <!-- <p class="more"><a href="/archives">更多文章...</a></p> -->
+              <!-- <p class="line49 console_line"><span style="color:#ff707f">gdb-peda$</span> <span class="cursor3 cursor-type"> _</span></p>  -->
           </div>
         </div>
       </div>
   </div>
-</div>
+</div> 
 
 
 
