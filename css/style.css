@@ -322,7 +322,7 @@
   font-size: 1.5em;
   font-style: normal;
   font-weight: 700;
-  color: #2bbc8a;
+  color: #ffa466;
   margin-top: 3rem;
   margin-bottom: 1rem;
   display: block;
@@ -442,7 +442,7 @@ html {
 }
 body {
   color: #c9cacc;
-  background-color: #1d1f21;
+  background-color: #101010;
   font-size: 14px;
   font-family: "Menlo", "Meslo LG", monospace;
   font-weight: 400;
@@ -583,7 +583,7 @@ body {
   font-size: 0.8rem;
   font-style: normal;
   font-weight: 200;
-  color: #2bbc8a;
+  color: #ffa466;
 }
 #header #nav ul {
   list-style-type: none;
@@ -599,13 +599,13 @@ body {
   background-repeat: repeat-x;
   background-position: bottom;
   background-size: 100% 6px;
-  background-image: linear-gradient(transparent, transparent 5px, #2bbc8a 5px, #2bbc8a);
+  background-image: linear-gradient(transparent, transparent 5px, #c9cacc 5px, #c9cacc);
 }
 #header #nav ul li {
   display: inline-block;
   vertical-align: middle;
   margin-right: 15px;
-  border-right: 1px dotted #2bbc8a;
+  border-right: 1px dotted #ffa466;
 }
 #header #nav ul .icon {
   display: none;
