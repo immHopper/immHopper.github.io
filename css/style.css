@@ -576,7 +576,7 @@ body {
   border-radius: 5px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-  margin-left: -2em;
+  margin-left: -1em;
 }
 #header #nav {
   letter-spacing: 0.01em;
