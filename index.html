@@ -76,7 +76,11 @@
        
         <li><a href="/">Home</a></li>
        
-        <li><a href="/archives/">Writing</a></li>
+        <li><a href="/archives/">Writings</a></li>
+       
+        <li><a href="/about/">About</a></li>
+       
+        <li><a target="_blank" rel="noopener" href="http://www.lightyear.fm/">Timeline</a></li>
       
     </ul>
   </div>
@@ -111,7 +115,7 @@ var typed = new Typed("#typedjs1", {
   <p>This is my personal blog, to collect and record some things I thought and learned. I&rsquo;m trying to prove that exploiting buffer overflows should be an art.</p>
   <h2 id=about-this-site>About some</h2>
   <p>I have to remind myself that some birds aren’t meant to be caged. Their feathers are just too bright. And when they fly away, the part of you that knows it was a sin to lock hem up DOES rejoice. Still, the place you live in is that much more drab and empty that they’re gone. I guess I just miss my friend.</p>
-  <span style=padding-left:35em>--- The Shawshank Redemption</span>
+  <!-- <span style=padding-left:35em>--- The Shawshank Redemption</span> -->
   </section>
 
 
@@ -129,6 +133,61 @@ var typed = new Typed("#typedjs1", {
     <!-- <a id="search" class="search icon" href="search">Search <i class="fa fa-search"></i></a> -->
   </p>
 </section>
+
+
+
+<div id='valine'>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="vcomments"></div>
+  <script>
+      new Valine({
+          el: '#vcomments',
+          notify: true,
+          verify: true,
+          appId: '7zw6tQBddCfPvbaVtBGxUy0G-gzGzoHsz',
+          appKey: 'voPGHhBz7MozpUm0Fq2AMFmv',
+          avatar: 'monsterid',
+      })
+  </script>
+<!-- 今日诗词：随机返回一句古诗词名句的接口，宅到用来做 Valine 的 placeholder 显示内容 -->
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+ jinrishici.load(function(result) {
+     var jrsc_plac =  result.data.content + "\n「" + result.data.origin.title + "」" + result.data.origin.dynasty + " · " + result.data.origin.author;
+     document.getElementById("veditor").setAttribute("placeholder",jrsc_plac);
+ })
+</script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <img src="https://s2.loli.net/2022/04/06/zXmouQw6jfWDPYv.png" alt="7.png" height='400' width='600' /> -->
 
@@ -311,18 +370,7 @@ var typed = new Typed("#typedjs1", {
 
 
 
-<!-- <div id="gitalk-container"></div>
-<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-<script>
-		var gitalkConfig = {"clientID":"ac06d202d6cc1312ebbf","clientSecret":"18b79e8b5326c1b5058a2122337e3e21b5960ec8","repo":"imhopper.github.io","owner":"imhopper","admin":["imhopper"],"distractionFreeMode":false};
-	    gitalkConfig.id = md5(location.pathname);
-		var gitalk = new Gitalk(gitalkConfig);
-	    gitalk.render("gitalk-container");
-</script><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-
-</div>
-</article> -->
 
 
 
@@ -379,7 +427,11 @@ var typed = new Typed("#typedjs1", {
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Writings</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://www.lightyear.fm/">Timeline</a></li>
         
       </ul>
     </nav> -->
