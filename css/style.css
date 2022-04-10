@@ -1608,7 +1608,11 @@ p.no-result {
   color: $color-comment-border !important;
 }
 #valine #vcomments .vwrap {
-  border: 2px solid #555 !important;
+  border: 3px solid #555 !important;
+  outline: 1px #1d1f21 dashed;
+  outline-offset: -10px;
+  border-radius: 4%;
+  background: #1d1f21;
 }
 #valine #vcomments .vwrap .vheader .vinput {
   border-bottom: 1px dashed $color-comment-border !important;
@@ -1645,6 +1649,10 @@ p.no-result {
   box-sizing: border-box;
   padding: 0 0 44px;
   background-color: #1d1f21;
+}
+#veditor:focus {
+  background-position-y: 200px;
+  transition: all 0.2s ease-in-out 0s;
 }
 #vcomments .vwrap .vheader {
   width: 80%;
