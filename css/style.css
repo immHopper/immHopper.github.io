@@ -545,7 +545,8 @@ body {
 #header {
   max-width: 710px;
   width: 100%;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto 2.5rem auto;
+  margin-left: -0.5em;
 }
 #header h1,
 #header .h1 {
