@@ -546,7 +546,6 @@ body {
   max-width: 710px;
   width: 100%;
   margin: 0 auto 2.5rem auto;
-  margin-left: -0.5em;
 }
 #header h1,
 #header .h1 {
@@ -1171,7 +1170,7 @@ article .content .caption {
 }
 #archive .post-list .post-item {
   list-style-type: none;
-  margin-left: 0;
+  margin-left: 0em;
   margin-bottom: 1rem;
 }
 #archive .post-list .post-item .meta {
