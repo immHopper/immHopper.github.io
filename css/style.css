@@ -545,6 +545,7 @@ body {
   max-width: 710px;
   width: 100%;
   margin: 0 auto 2.5rem auto;
+  margin-left: 10em;
 }
 #header h1,
 #header .h1 {
@@ -1171,9 +1172,12 @@ article .content .caption {
   margin-right: 16px;
 }
 @media (min-width: 480px) {
+  #archive .post-list {
+    margin-left: 7rem;
+  }
   #archive .post-list .post-item {
     display: flex;
-    margin-left: 1rem;
+    margin-left: 0rem;
     margin-bottom: 5px;
   }
   #archive .post-list .post-item .meta {
@@ -7048,6 +7052,104 @@ body {
   height: 100px;
   overflow: hidden;
   transition: height 0.3s ease;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin-top: 15px;
+  background: #1d1f21;
+  background: linear-gradient(left, rgba(33,53,18,0.3) 0%, rgba(38,88,19,0.4) 30%, rgba(73,91,9,0.3) 74%, rgba(24,43,4,0.3) 100%), #000;
+}
+section {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: show;
+}
+span {
+  color: #fff;
+}
+.chemical-element {
+  width: 165px;
+  height: 165px;
+  position: relative;
+  font: bold 95px Arial;
+  color: #fafffb;
+  padding: 25px 25px 25px 30px;
+  border: 3px solid #ddffe2;
+  display: inline-block;
+  background: linear-gradient(-45deg, #5cbe73 1%, #182b04 100%);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+}
+.chemical-element:nth-child(4) {
+  margin-left: 165px;
+  padding-left: 23px;
+}
+.desc {
+  position: absolute;
+  font: bold 13px Arial;
+  color: rgba(244,247,245,0.95);
+}
+.big {
+  font: bold 20px Arial;
+}
+.medium {
+  font: bold 17px Arial;
+}
+div[role="top-left"] {
+  top: 8px;
+  left: 10px;
+}
+div[role="top-right"] {
+  top: 8px;
+  right: 5px;
+  text-align: right;
+  width: 25px;
+}
+div[role="bottom-left-1"] {
+  bottom: 20px;
+  left: 5px;
+  text-align: left;
+}
+div[role="bottom-left-2"] {
+  bottom: 5px;
+  left: 5px;
+  text-align: left;
+}
+.title-1,
+.title-2 {
+  width: 50px;
+  display: inline-block;
+  height: 130px;
+  vertical-align: bottom;
+}
+.title-2 {
+  height: 134px;
+}
+#smoke {
+  position: absolute;
+  z-index: -1;
+  left: 30%;
+  top: -15px;
+}
+audio {
+  display: none;
+}
+#player {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  transition: all 0.3s ease-in;
+  opacity: 0.1;
+  cursor: pointer;
+}
+#player:hover {
+  opacity: 1;
+}
+#player svg[role="playing"] {
+  display: none;
 }
 @-moz-keyframes cursor {
   0% {
