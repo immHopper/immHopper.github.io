@@ -70,6 +70,9 @@
 <meta name="generator" content="Hexo 6.1.0"></head>
 
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+
+
 
 
 <body>
@@ -172,15 +175,15 @@
 <p>Freebuff：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/320837.html">CALDERA-ATT&amp;CK自动化对抗框架</a></p>
 <p>“CALDERA” is a cyber security platform designed to easily automate adversary emulation, assist manual red-teams, and automate incident response. —— MITRE</p>
 </blockquote>
-<h2 id="0x00-关于CALDERA的前世"><a href="#0x00-关于CALDERA的前世" class="headerlink" title="0x00 关于CALDERA的前世"></a><strong>0x00 关于CALDERA的前世</strong></h2><p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small" alt="img"></p>
+<h2 id="0x00-关于CALDERA的前世"><a href="#0x00-关于CALDERA的前世" class="headerlink" title="0x00 关于CALDERA的前世"></a><strong>0x00 关于CALDERA的前世</strong></h2><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small" alt="img"></a></p>
 <p>最近几年关于ATT&amp;CK框架热度，简直是直冲云霄！谁都挡不住啊！那说到 ATT&amp;CK这个框架，就不得不提一下这个神秘的组织了——<a target="_blank" rel="noopener" href="https://www.mitre.org/">MITRE</a>，这个组织起源于二战时期的麻省理工学院（MIT）计算机实验室，成立于 1958 年，是一家非营利性公共，服务机构，为美国联邦政府提供工程和技术指导，包括国防情报、国土安全、网络安全、航空航天等等。而 ATT&amp;CK 来源于 MITRE 研究项目 FMX（2010 年）；当然我们熟知的 CVE 则由 MITRE 联合创始人 David E. Mannand Steven M. Christey 于 1999 年提出：《Towards a Common Enumeration of Vulnerabilities》，不得不说人家真牛啊！关于ATT&amp;CK框架的具体内容，这里就不做详细的介绍了，网上一大堆资源，自己去看看。</p>
 <p>CALDERA 这个框架也是 MITRE这个组织搞的，<a target="_blank" rel="noopener" href="https://caldera.readthedocs.io/en/latest/index.html">CALDERA</a>这个框架的英文全称为 ( Cyber Adversary Language and Decision Engine for Red Team Automation)，看不懂的兄弟们，没关系哈，简单点就是红队自动化工具，我们叫它 “<strong>破火山口</strong>“。到这里有的老哥们会说，红队测试的工具那么多，为啥这款如此的耀眼？别急 ! CALDERA 之所以牛，还在于 MITER 这个组织是基于 ATT&amp;CK 框架推出的<strong>网络安全红蓝对抗框架</strong>，它可用于<strong>自动化红队行动</strong>，<strong>手工红队行动</strong>，<strong>自动化应急响应</strong>等攻防实践，接近于<strong>APT攻击</strong> 的行为模式。本文将对CALDERA 做一个详细的介绍。</p>
-<h2 id="0x01-关于CALDERA的组成和原理"><a href="#0x01-关于CALDERA的组成和原理" class="headerlink" title="0x01 关于CALDERA的组成和原理"></a>0x01 关于CALDERA的组成和原理</h2><p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220124/1643037573_61eec3859920974505077.png!small" alt="img"></p>
+<h2 id="0x01-关于CALDERA的组成和原理"><a href="#0x01-关于CALDERA的组成和原理" class="headerlink" title="0x01 关于CALDERA的组成和原理"></a>0x01 关于CALDERA的组成和原理</h2><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220124/1643037573_61eec3859920974505077.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220124/1643037573_61eec3859920974505077.png!small" alt="img"></a></p>
 <p><strong>CALDERA</strong> 框架由两个组件组成，一个是核心部分，另一是插件部分。</p>
 <p><strong>核心部分</strong> 主要包括 C2 命令控制服务器，REST API 接口，WEB接口，而 <strong>插件部分</strong>不限于GUI接口，Access，Atomic，Compass，Gameboard，Response等。</p>
 <p>（不得不说一个好玩意儿，它是可以汇聚百川的资源，而插件部分就给了这个框架注入了持续不断的水源 ！）</p>
 <p>那它的实现原理是怎样的呢？别急，看下图：</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643040515_61eecf03d520887506f29.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643040515_61eecf03d520887506f29.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643040515_61eecf03d520887506f29.png!small" alt="img"></a></p>
 <p><strong>C2 Server</strong> 即为安装运行 CALDERA 程序的服务器，<strong>默认开启 8888 端口</strong>进行监听；而 <strong>Agents</strong> 即为安装agent或shell 程序的主机，通过<strong>HTTP</strong>或 <strong>TCP****等</strong>网络协议会话与服务器进行通信。</p>
 <p><strong>Ability Adversary Operation Pliugins</strong> 中的 Ability 是一段具体的功能程序（<strong>TTPS</strong>）, 而 Adersary（<strong>Profile</strong>）是一系列 Ability 集合，Operation 则是针对特定组特定的 Adversary 实现。</p>
 <h2 id="0x02-CALDERA环境的安装与功能介绍"><a href="#0x02-CALDERA环境的安装与功能介绍" class="headerlink" title="0x02 CALDERA环境的安装与功能介绍"></a>0x02 CALDERA环境的安装与功能介绍</h2><p><a target="_blank" rel="noopener" href="https://github.com/mitre/caldera">Caldera项目地址：https://github.com/mitre/caldera</a></p>
@@ -200,9 +203,9 @@
 
 
 <p>可以看到如下页面，就已经成功了</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643042408_61eed6681ff23b3df5de8.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643042408_61eed6681ff23b3df5de8.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643042408_61eed6681ff23b3df5de8.png!small" alt="img"></a></p>
 <p>然后直接去浏览器访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:8888/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0">http://127.0.0.1:8888/就可以看到</a> CALDERA 的页面了</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643043210_61eed98a82aed2e7325b8.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643043210_61eed98a82aed2e7325b8.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643043210_61eed98a82aed2e7325b8.png!small" alt="img"></a></p>
 <p>登录页面默认有三个账号：</p>
 <table>
 <thead>
@@ -229,7 +232,7 @@
 </tr>
 </tbody></table>
 <p>登录上去后，就可以看到主页面了</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643082398_61ef729e56a7d814ef588.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643082398_61ef729e56a7d814ef588.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643082398_61ef729e56a7d814ef588.png!small" alt="img"></a></p>
 <p>下面我们来看看 <strong>CALDERA</strong> 的功能</p>
 <p>大体上分为四个模块：<strong>Campaigns 活动模块，Plugins 插件模块 ，Advanced 高级模块，Administrative 管理模块</strong></p>
 <p>这里只介绍前两个主要模块</p>
@@ -237,26 +240,26 @@
 <p><strong>agents 代理</strong></p>
 <p>代理 是在特定时间间隔连接回 CALDERA 以获取指令的软件程序。<strong>代理简单理解就是受害者方</strong>，代理通过最初在代理安装时定义的联系方法与 CALDERA 服务器进行通信。而已安装的代理出现在“代理”对话框的 <strong>UI</strong> 中。代理人通过他们独特的爪子或爪印来识别。</p>
 <p><strong>如何部署代理？看图：</strong></p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086660_61ef83443468fb715ab0c.png!small" alt="img"></p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086840_61ef83f8e3307bc059507.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643086660_61ef83443468fb715ab0c.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086660_61ef83443468fb715ab0c.png!small" alt="img"></a></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643086840_61ef83f8e3307bc059507.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086840_61ef83f8e3307bc059507.png!small" alt="img"></a></p>
 <p>CALDERA 包括许多代理程序，每个程序都添加了独特的功能，在部署代理的时候，直接选择相应的代理和平台。</p>
 <ol>
 <li>**Sandcat (54ndc47)**：一个 GoLang 代理，通过 SMB 联系人通过 HTTP、Git 或 P2P 进行通信</li>
 <li><strong>Manx</strong>：一个 GoLang 代理，它通过 TCP 联系人进行通信并充当反向 shell</li>
 <li><strong>Ragdoll</strong>：通过 HTML 联系人进行通信的 Python 代理</li>
 </ol>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086915_61ef84430ef684773448e.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643086915_61ef84430ef684773448e.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086915_61ef84430ef684773448e.png!small" alt="img"></a></p>
 <p><strong>adversaries 对手，Abilities 能力</strong></p>
 <p><strong>对手</strong>是一组能力，代表了威胁参与者可用的战术、技术和程序 (TTP)。运行操作时使用对手配置文件来确定将执行哪些能力。</p>
 <p>而 <strong>能力</strong> 是一种特定的 ATT&amp;CK 战术&#x2F;技术实现，可以在运行的代理对象上执行。能力将包括要运行的命令、命令可以在其上运行的平台&#x2F;执行器（例如：Windows &#x2F; PowerShell）、要包含的有效负载以及对模块的引用以解析 CALDERA 服务器上的输出。</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643088058_61ef88ba90ff7725b3413.png!small" alt="img"></h3><p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643093093_61ef9c6558b7b994b305a.png!small" alt="img"></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643088058_61ef88ba90ff7725b3413.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643088058_61ef88ba90ff7725b3413.png!small" alt="img"></a></h3><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643093093_61ef9c6558b7b994b305a.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643093093_61ef9c6558b7b994b305a.png!small" alt="img"></a></p>
 <p>选择一个战术后，旁边就会出现具体的战术行为，你可以自由选择你想做的事</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643088156_61ef891c9aad9fe33c8de.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643088156_61ef891c9aad9fe33c8de.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643088156_61ef891c9aad9fe33c8de.png!small" alt="img"></a></p>
 <p><strong>operations 行动</strong></p>
 <p>如果想查看已操作过的代理对象，点击 Operations 来选择相应的代理对象进行查看</p>
 <p>如果想对一个新的代理对象进行操作，点击 VIEW , 取一个操作名字，并进行一些参数配置就可以run了</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643089086_61ef8cbe36969e9b70616.png!small" alt="img"></p>
-<h2 id="二，Plugins-插件模块"><a href="#二，Plugins-插件模块" class="headerlink" title="二，Plugins 插件模块"></a><strong>二，Plugins 插件模块</strong></h2><p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643091560_61ef966816aafd6da9f57.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643089086_61ef8cbe36969e9b70616.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643089086_61ef8cbe36969e9b70616.png!small" alt="img"></a></p>
+<h2 id="二，Plugins-插件模块"><a href="#二，Plugins-插件模块" class="headerlink" title="二，Plugins 插件模块"></a><strong>二，Plugins 插件模块</strong></h2><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643091560_61ef966816aafd6da9f57.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643091560_61ef966816aafd6da9f57.png!small" alt="img"></a></p>
 <p><strong>（1）Access 插件</strong></p>
 <p>该插件允许从数据库中分配任何具有任何能力的代理。这个插件可以实现在数据库中以任何能力向任何代理对象分配任务，还可以进行初始化访问攻击</p>
 <p><strong>（2）Atomic 插件</strong></p>
@@ -292,17 +295,17 @@
 <p><strong>下载插件</strong></p>
 <p>git clone <a target="_blank" rel="noopener" href="https://github.com/mitre/mock">https://github.com/mitre/mock</a></p>
 <p><strong>启用插件</strong>： <strong>Advanced</strong>—— <strong>Configuration —— Plugins 选择对应想激活的插件即可</strong></p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643092129_61ef98a1a2d75f7e0a136.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643092129_61ef98a1a2d75f7e0a136.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643092129_61ef98a1a2d75f7e0a136.png!small" alt="img"></a></p>
 <h2 id="0x03-CALDERA-的实战演练"><a href="#0x03-CALDERA-的实战演练" class="headerlink" title="0x03 CALDERA 的实战演练"></a><strong>0x03 CALDERA 的实战演练</strong></h2><p>首先生成自己攻击代码</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643096983_61efab97c2aefb36fae7c.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643096983_61efab97c2aefb36fae7c.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643096983_61efab97c2aefb36fae7c.png!small" alt="img"></a></p>
 <p>将这段代码结合图片混合，并做免杀，放到带有火绒的目标机上（ps：这里就不做详细演示了，网上有），我们模拟目标机打开查看这张gif图片</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643099675_61efb61bafbf787f09b47.gif!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643099675_61efb61bafbf787f09b47.gif!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643099675_61efb61bafbf787f09b47.gif!small" alt="img"></a></p>
 <p>看目标机是否通过 8888 端口返回给我们</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643099862_61efb6d64a894425f8984.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643099862_61efb6d64a894425f8984.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643099862_61efb6d64a894425f8984.png!small" alt="img"></a></p>
 <p>可以看到此时已经成功了！现在我们模拟一些红队间谍活动</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643101057_61efbb81eb3691386c603.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643101057_61efbb81eb3691386c603.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643101057_61efbb81eb3691386c603.png!small" alt="img"></a></p>
 <p>将这些信息以PDF格式导出</p>
-<p><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643101132_61efbbcc2cedb8a5bf2b5.png!small" alt="img"></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643101132_61efbbcc2cedb8a5bf2b5.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643101132_61efbbcc2cedb8a5bf2b5.png!small" alt="img"></a></p>
 <p>到这里模拟的前期间谍活动已经结束了</p>
 <p><strong>免责声明</strong>：本文提及的技术仅可用于私人学习测试等合法场景中，任何不当利用该技术所造成的刑事、民事责任均与本文作者无关</p>
 
@@ -435,5 +438,8 @@
 <!-- Disqus Comments -->
 
 
+<!-- FancyBox -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 
 
