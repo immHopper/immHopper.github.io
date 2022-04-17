@@ -162,7 +162,7 @@
 <h4 id="3-接口级虚拟化："><a href="#3-接口级虚拟化：" class="headerlink" title="3.接口级虚拟化："></a>3.<strong>接口级虚拟化</strong>：</h4><p>这是一种在同架构下执行其他系统二进制程序的技术，Windows下的程序无法直接在同架构的Linux下系统执行，因为它们的ABI不一致，这涉及可执行文件格式与依赖库，前者只需要编写相应的加载程序，后者面临的问题更加复杂，它涉及很多闭源的依赖库，为此需要完全重新实现相同功能的库，此类软件有如Linux下的wine与mac下的crossover。</p>
 <h4 id="4-容器级虚拟化："><a href="#4-容器级虚拟化：" class="headerlink" title="4.容器级虚拟化："></a>4.<strong>容器级虚拟化</strong>：</h4><p>这是一种利用操作系统隔离机制实现虚拟化的技术，在此技术下对于容器内的应用它仿佛运行在一台普通的虚拟机中，但在外部看来它只是一个普通进程，只是由命名空间等实现了一个jail，它和宿主系统使用了同样的内核，因此会有一些ABI兼容性限制，此处就是指LXC及其上的Docker。</p>
 <h4 id="5-系统级虚拟化："><a href="#5-系统级虚拟化：" class="headerlink" title="5.系统级虚拟化："></a>5.<strong>系统级虚拟化</strong>：</h4><p>这是一种更完整的虚拟化技术，该技术下需要虚拟完整的硬件，其实对于软件来说，它只关注CPU&#x2F;内存&#x2F;外设(中断与IO)这三点，因此虚拟出这三点时就能实现完整的系统虚拟化</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/1.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/1.png" class="">
 
 
 
@@ -187,12 +187,12 @@
 <h4 id="1-Hypervisor型："><a href="#1-Hypervisor型：" class="headerlink" title="1.Hypervisor型："></a>1.Hypervisor型：</h4><p>这两件事都由VMM完成，效率高更安全但是实现复杂，如Vmware ESX server，KVM+Kernel</p>
 <h4 id="2-Hosted型："><a href="#2-Hosted型：" class="headerlink" title="2.Hosted型："></a>2.Hosted型：</h4><p>物理资源管理由宿主机系统完成，虚拟化与虚拟资源管理由VMM实现，优点是复用现有系统实现简单，缺点嘛就是暴露面多啦，且效率相对低点，如Vmware Workstation</p>
 <h4 id="3-Mixed型："><a href="#3-Mixed型：" class="headerlink" title="3.Mixed型："></a>3.Mixed型：</h4><p>VMM实现物理资源管理，但再创建一个特殊虚拟机去复用已有系统的某些功能，优点就是简单与安全，缺点就是效率降低了，如XEN</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/2.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/2.png" class="">
 
 
 
 <p>传统上也把前面两种架构叫做一型和二型：</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/3.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/3.png" class="">
 
 
 
@@ -201,22 +201,22 @@
 <h4 id="allocator："><a href="#allocator：" class="headerlink" title="allocator："></a><strong>allocator：</strong></h4><p>分配各种所需资源，很多资源都需要为其建立一份虚拟拷贝，VM读写时都是操作这份拷贝(shadow structures)</p>
 <h4 id="interpreter："><a href="#interpreter：" class="headerlink" title="interpreter："></a><strong>interpreter：</strong></h4><p>使用等效的代码解释导致VM退出的特殊指令&#x2F;事件</p>
 <h2 id="Intel-VT"><a href="#Intel-VT" class="headerlink" title="Intel VT"></a>Intel VT</h2><p>最初的X86架构存在虚拟化漏洞(virtualization hole，见下文)，为了方便实现且减小开销Intel和AMD都在后续通过新增处理器扩展来弥补该缺陷，本文只关注Intel VT技术，此处列出技术名称与简单描述，细节见后文：</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/4.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/4.png" class="">
 
 
 
 <p>与IO相关的技术还有很多，这些技术不仅用于系统虚拟化，也用于通常的网络&#x2F;存储虚拟化或单纯的驱动中，用以提高性能：</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/5.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/5.png" class="">
 
 
 
 <p>另外还有几个没见过的，只列出：</p>
 <p><strong>Intel® VT FlexPriority</strong> ：它通过优化VM中断处理来提升效率，具体说就是通过新虚拟的TPR表示当前可处理的中断优先级，VM可直接操作它，从而消除大多数Guest访问TPR(Task Priority Registers)时的退出来减少上下文切换次数，增加IO等吞吐率</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/6.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/6.png" class="">
 
 <p><strong>Intel® VT FlexMigration</strong>：虚拟化灵活迁移技术可以帮助VMM建立改进的兼容性池，通过所有的服务器暴露一致的指令集以实现实时迁移(包括以后加入升级后的硬件)</p>
 <p><strong>Intel® Trusted Execution Technology</strong>：可信执行技术通过硬件提供安全性来保护免受软件攻击，具体上通过硬件实现可信启动，配置保护，数据销毁</p>
-<img src="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/7.png" class="">
+<img src="/images/loading.gif" data-original="/2022/04/17/Virtualization-IA-virtualization-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8E%9F%E7%90%86%E4%B8%8EIA%E8%99%9A%E6%8B%9F%E5%8C%96%E6%80%BB%E7%BB%93/7.png" class="">
 
 
 
@@ -321,7 +321,13 @@
 
 </footer>  -->
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>
 <!-- styles -->
 
