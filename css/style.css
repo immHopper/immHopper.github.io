@@ -545,6 +545,7 @@ body {
   max-width: 710px;
   width: 100%;
   margin: 0 auto 1rem auto;
+  margin-left: -1em;
 }
 #header h1,
 #header .h1 {
@@ -568,14 +569,13 @@ body {
   display: inline-block;
   float: left;
   margin-right: 10px;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   background-repeat: no-repeat;
-  background-size: 60px 60px;
+  background-size: 55px 55px;
   border-radius: 5px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-  margin-left: -1em;
 }
 #header #nav {
   letter-spacing: 0.01em;
@@ -622,8 +622,8 @@ body {
 }
 @media screen and (max-width: 480px) {
   #header #title {
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 11.5px;
+    padding-bottom: 11.5px;
   }
   #header #nav ul a:hover {
     background: none;
@@ -643,7 +643,7 @@ body {
   }
   #header #nav li:not(:first-child) {
     padding-top: 1rem;
-    padding-left: 80px;
+    padding-left: 75px;
     font-size: 1rem;
   }
 }
@@ -1168,11 +1168,11 @@ article .content .caption {
   font-size: 14px;
   color: #666;
   min-width: 100px;
-  margin-right: 16px;
+  margin-right: 15px;
 }
 @media (min-width: 480px) {
   #archive .post-list {
-    margin-left: 2rem;
+    margin-left: 0rem;
   }
   #archive .post-list .post-item {
     display: flex;
@@ -1920,7 +1920,7 @@ body {
 .logo__cursor {
   display: inline-block;
   width: 10px;
-  height: 1rem;
+  height: 0.7rem;
   background: #fff;
   margin-left: 5px;
   border-radius: 1px;
