@@ -569,10 +569,10 @@ body {
   display: inline-block;
   float: left;
   margin-right: 10px;
-  width: 55px;
+  width: 65px;
   height: 55px;
   background-repeat: no-repeat;
-  background-size: 55px 55px;
+  background-size: 65px 55px;
   border-radius: 5px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
@@ -643,7 +643,7 @@ body {
   }
   #header #nav li:not(:first-child) {
     padding-top: 1rem;
-    padding-left: 75px;
+    padding-left: 85px;
     font-size: 1rem;
   }
 }
