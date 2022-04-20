@@ -441,7 +441,7 @@ html {
 }
 body {
   color: #c9cacc;
-  background-color: #101010;
+  background-color: #1d1f21;
   font-size: 14px;
   font-family: "Menlo", "Meslo LG", monospace;
   font-weight: 400;
@@ -475,7 +475,7 @@ body {
   background-repeat: repeat-x;
   background-position: bottom;
   background-size: 100% 6px;
-  background-image: linear-gradient(transparent, transparent 5px, #c9cacc 5px, #c9cacc);
+  background-image: linear-gradient(transparent, transparent 10px, #2bbc8a 10px, #2bbc8a);
 }
 .content a:hover {
   background-image: linear-gradient(transparent, transparent 4px, #d480aa 4px, #d480aa);
@@ -484,7 +484,7 @@ body {
   background: none;
 }
 .content a.icon:hover {
-  color: #d480aa;
+  color: #c9cacc;
 }
 .content h1 a,
 .content .h1 a,
@@ -1177,7 +1177,7 @@ article .content .caption {
   #archive .post-list .post-item {
     display: flex;
     margin-left: 0rem;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   #archive .post-list .post-item .meta {
     text-align: left;
@@ -1662,6 +1662,66 @@ article .content .caption {
     width: 33.33%;
     padding: 10px 5px;
   }
+}
+.search-input {
+  font-size: 0.875rem;
+  height: 1.75rem;
+  border-width: 1px;
+  display: block;
+  font-family: inherit;
+  padding: 0.5rem;
+  width: 13rem;
+  border: 2px solid #1d1f21;
+  background-color: #fff;
+}
+.reset-button {
+  height: 1.75rem;
+  color: #fff;
+  background-color: #2bbc8a;
+  padding: 0 16px;
+  font-size: 0.8em;
+  border: 1px solid #2bbc8a;
+  border-radius: 2px;
+  font-family: inherit;
+  font-weight: bold;
+}
+#search-result ul.search-result-list {
+  list-style-type: none;
+  padding: 0px;
+}
+#search-result li {
+  margin: 2em auto;
+  border-bottom: 2px solid #2bbc8a;
+}
+#search-result .search-result-list li:hover {
+  color: #eee;
+}
+#search-result a.search-result-title {
+  line-height: 1.2;
+  font-weight: bold;
+  color: #2bb48a;
+}
+#search-result p.search-result {
+  margin: 0.4em auto;
+  max-height: 13em;
+  overflow: hidden;
+  font-size: 0.8em;
+  text-align: justify;
+}
+#search-result em.search-keyword {
+  color: #f58e90;
+  border-bottom: 1px dashed #f58e90;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+p.no-result {
+  display: none;
+  padding-bottom: 0.5em;
+  color: #eee;
+  border-bottom: 2px solid #2bbc8a;
+}
+.sticky {
+  color: #2bbc8a;
 }
 .highlight-wrap[data-rel]:hover {
   transition: box-shadow 0.3s ease-in-out;
