@@ -1732,7 +1732,7 @@ p.no-result {
 }
 #tag-cloud .tag-cloud-tags a {
   display: inline-block;
-  margin: 6px;
+  margin: 2px;
 }
 .highlight-wrap[data-rel]:hover {
   transition: box-shadow 0.3s ease-in-out;
