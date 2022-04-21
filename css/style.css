@@ -2051,6 +2051,25 @@ main.container {
 .menu a:last-of-type {
   margin-right: 0;
 }
+.logo-head {
+  color: #fff;
+  font-weight: bold;
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  text-shadow: 0 0 5px #68b60d;
+  line-height: 1em;
+  font-size: 2.6em;
+}
+.logo-head1 {
+  color: #fff;
+  font-weight: bold;
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  text-shadow: 0 0 5px #68b60d;
+  line-height: 1.2em;
+  font-size: 2.6em;
+}
+.w-36 {
+  width: 3.5rem;
+}
 body {
   display: flex;
   justify-content: center;
