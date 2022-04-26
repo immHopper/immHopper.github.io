@@ -444,7 +444,7 @@ body {
   background-color: #1d1f21;
   font-size: 14px;
   font-family: "Menlo", "Meslo LG", monospace;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.725;
   text-rendering: geometricPrecision;
   min-height: 100%;
@@ -524,7 +524,7 @@ body {
 }
 .width {
   width: 100%;
-  max-width: 39rem;
+  max-width: 44rem;
 }
 @media (max-width: 480px) {
   .px3 {
@@ -569,13 +569,14 @@ body {
   display: inline-block;
   float: left;
   margin-right: 10px;
-  width: 75px;
-  height: 65px;
+  width: 65px;
+  height: 55px;
   background-repeat: no-repeat;
-  background-size: 75px 65px;
+  background-size: 65px 55px;
   border-radius: 5px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+  margin-top: -10px;
 }
 #header #nav {
   letter-spacing: 0.01em;
@@ -622,8 +623,8 @@ body {
 }
 @media screen and (max-width: 480px) {
   #header #title {
-    padding-top: 16.5px;
-    padding-bottom: 16.5px;
+    padding-top: 11.5px;
+    padding-bottom: 11.5px;
   }
   #header #nav ul a:hover {
     background: none;
@@ -643,7 +644,7 @@ body {
   }
   #header #nav li:not(:first-child) {
     padding-top: 1rem;
-    padding-left: 95px;
+    padding-left: 85px;
     font-size: 1rem;
   }
 }
@@ -1006,10 +1007,10 @@ body {
 }
 .post-list .post-item .meta {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   color: #666;
   min-width: 100px;
-  margin-right: 16px;
+  margin-right: 20px;
 }
 @media (min-width: 480px) {
   .post-list .post-item {
@@ -1191,7 +1192,7 @@ article .content .caption {
   padding-bottom: 10px;
   color: #666;
   font-size: 11px;
-  max-width: 700px;
+  max-width: 44rem;
   width: 100%;
   margin: 0 auto 1rem auto;
   vertical-align: top;
