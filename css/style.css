@@ -576,7 +576,7 @@ body {
   border-radius: 5px;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-  margin-top: -10px;
+  margin-top: -5px;
 }
 #header #nav {
   letter-spacing: 0.01em;
@@ -1192,7 +1192,7 @@ article .content .caption {
   padding-bottom: 10px;
   color: #666;
   font-size: 11px;
-  max-width: 44rem;
+  max-width: 43rem;
   width: 100%;
   margin: 0 auto 1rem auto;
   vertical-align: top;
@@ -2054,20 +2054,11 @@ main.container {
   margin-right: 0;
 }
 .logo-head {
-  color: #fff;
-  font-weight: bold;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  text-shadow: 0 0 5px #68b60d;
-  line-height: 1em;
-  font-size: 2.6em;
+  color: #666;
 }
 .logo-head1 {
-  color: #fff;
-  font-weight: bold;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  text-shadow: 0 0 5px #68b60d;
-  line-height: 1.2em;
-  font-size: 2.6em;
+  color: #666;
+  font-size: 1.6em;
 }
 .w-36 {
   width: 3.5rem;
