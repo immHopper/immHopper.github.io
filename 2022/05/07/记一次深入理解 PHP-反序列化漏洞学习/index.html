@@ -21,8 +21,9 @@
 <meta property="og:image" content="https://i.imgtg.com/2022/05/07/z44vM.png">
 <meta property="og:image" content="https://i.imgtg.com/2022/05/08/z4QuF.png">
 <meta property="og:image" content="https://i.imgtg.com/2022/05/08/z4uPC.png">
+<meta property="og:image" content="https://i.imgtg.com/2022/05/08/zDaax.png">
 <meta property="article:published_time" content="2022-05-07T06:51:18.000Z">
-<meta property="article:modified_time" content="2022-05-08T03:31:59.234Z">
+<meta property="article:modified_time" content="2022-05-08T05:36:19.660Z">
 <meta property="article:author" content="Powered by Hopper">
 <meta property="article:tag" content="PHP反序列化漏洞">
 <meta property="article:tag" content="PHP">
@@ -309,6 +310,8 @@
 
 <p>我们去除了一切与我们要篡改的属性无关的内容，对其进行序列化操作，然后将序列化的结果复制出来，想刚刚的代码发起请求</p>
 <p><a data-fancybox="gallery" data-src="https://i.imgtg.com/2022/05/08/z4uPC.png" data-caption="z4uPC.png"><img src="/images/loading.gif" data-original="https://i.imgtg.com/2022/05/08/z4uPC.png" alt="z4uPC.png"></a></p>
+<p>把这段payload 传送过去：</p>
+<p><a data-fancybox="gallery" data-src="https://i.imgtg.com/2022/05/08/zDaax.png" data-caption="zDaax.png"><img src="/images/loading.gif" data-original="https://i.imgtg.com/2022/05/08/zDaax.png" alt="zDaax.png"></a></p>
 <p>可以看到我们攻击成功，特别要提醒一下的就是我在图中框起来的部分，上面说过由于是私有属性，他有自己特殊的格式会在前后加两个 %00 ，所以我们在传输过程中不能忘掉</p>
 <p><strong>通过这个简单的例子总结一下寻找 PHP 反序列化漏洞的方法或者说流程</strong></p>
 <ol>
