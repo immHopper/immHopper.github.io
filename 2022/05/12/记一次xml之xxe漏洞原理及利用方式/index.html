@@ -140,6 +140,10 @@
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link-link" href="/tags/xml/" rel="tag">xml</a>, <a class="tag-link-link" href="/tags/xxe/" rel="tag">xxe</a>
+        <span>| 阅读:</span>
+        <span id="busuanzi_container_page_pv">
+          <span id="busuanzi_value_site_pv"></span>
+        </span>
     </div>
 
 
@@ -318,27 +322,6 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-    <div id="gitalk-container"></div>
-    <script type="text/javascript">
-        var gitalk = new Gitalk({
-            clientID: 'f3f86eda0bb3ac1735fd',
-            clientSecret: 'dab21cb369805d3e224032743bac1911c372a9a3',
-            id: md5(window.location.pathname),
-            repo: 'iamhopper.github.io',
-            owner: 'imhopper',
-            admin: 'imhopper',
-            distractionFreeMode: ''
-        })
-        gitalk.render('gitalk-container')
-    </script>
-
-
-
-
-
     </div>
     
       <div id="footer-post-container">
@@ -394,9 +377,8 @@
       </ul>
     </nav> 
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
-    <!-- <span id="busuanzi_container_site_pv">访客: <span id="busuanzi_value_site_pv"></span>次</span>  -->
-  </div>
 
+  </div>
 </footer> 
 
 <script>
@@ -447,5 +429,19 @@
 <!-- FancyBox -->
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+<!--pjax：防止跳转页面音乐暂停-->
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+
 
 
