@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言 SQL 注入是一种将 SQL 代码插入或添加到应用（用户）的输入参数中，之后再将这些参数传递给后台的 SQL 服务器加以解析并执行的攻击。   简单来说，网站程序存在可控传递参数，参数并未进行过滤，直接带入数据库查询了，导致攻击者可通过传递恶意参数sql语句代码进行攻击  危害当访问动态网页时, Web 服务器会向数据访问层发起 Sql 查询请求，如果权限验证通过就会执行 Sql 语句。这种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sql注入漏洞利用及提权百科全书">
+<meta property="og:url" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="前言 SQL 注入是一种将 SQL 代码插入或添加到应用（用户）的输入参数中，之后再将这些参数传递给后台的 SQL 服务器加以解析并执行的攻击。   简单来说，网站程序存在可控传递参数，参数并未进行过滤，直接带入数据库查询了，导致攻击者可通过传递恶意参数sql语句代码进行攻击  危害当访问动态网页时, Web 服务器会向数据访问层发起 Sql 查询请求，如果权限验证通过就会执行 Sql 语句。这种">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/1.png">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/2.png">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/3.png">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/4.png">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/5.png">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/6.png">
+<meta property="og:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/7.png">
+<meta property="article:published_time" content="2022-05-15T16:31:12.000Z">
+<meta property="article:modified_time" content="2022-05-16T17:26:09.460Z">
+<meta property="article:author" content="Powered by Hopper">
+<meta property="article:tag" content="sql注入漏洞">
+<meta property="article:tag" content="漏洞提权">
+<meta property="article:tag" content="插件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Sql注入漏洞利用及提权百科全书</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+
+
+
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <!-- <span id="nav"> -->
+      <!-- <ul>
+        <li><a href="/">主页</a></li>
+      </ul> -->
+      <!-- <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul> -->
+    <!-- </span> -->
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2022/05/14/Shiro-1-2-4-RememberMe%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%A4%8D%E7%8E%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-CVE-2016-4437/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+        <!-- <i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li><li><a class="icon" aria-label="切换主题"><i class="fas fa-lightbulb" aria-hidden="true" onmouseover='$("#i-switch").toggle()' onmouseout='$("#i-switch").toggle()' onclick="switchNightMode()"></i></a></li> -->
+        <li><a class="icon" aria-label="Back to home" href="/"><i class="fa fas fa-home" aria-hidden="true" onmouseover='$("#i-home").toggle()' onmouseout='$("#i-home").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="some music" target="_blank" rel="noopener" href="http://www.lightyear.fm/"><i class="fa fa-solid fa-music" aria-hidden="true" onmouseover='$("#i-music").toggle()' onmouseout='$("#i-music").toggle()'></i></a></li>
+        <!-- <li><a class="icon" aria-label="切换主题"><i class="fa fa-solid fa-music" aria-hidden="true" onmouseover='$("#i-switch").toggle()' onmouseout='$("#i-switch").toggle()' onclick="switchNightMode()"></i></a></li> -->
+      </ul>   
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-home" class="info" style="display:none">Back to home</span>
+      <span id="i-music" class="info" style="display:none">some music</span>
+      <!-- <span id="i-switch" class="info" style="display:none">切换主题</span> -->
+      <!-- <span id="i-share" class="info" style="display:none;">Share post</span> -->
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <!-- <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&text=Sql注入漏洞利用及提权百科全书"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&is_video=false&description=Sql注入漏洞利用及提权百科全书"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sql注入漏洞利用及提权百科全书&body=Check out this article: http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&name=Sql注入漏洞利用及提权百科全书&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul> -->
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B1%E5%AE%B3"><span class="toc-number">2.</span> <span class="toc-text">危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">SQL注入的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E9%97%AD%E5%90%88%E6%96%B9%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">手工注入如何判断闭合方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5%E8%BF%98%E6%98%AF%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="toc-number">4.1.</span> <span class="toc-text">判断是字符型注入还是数字型注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9E%8B%E5%88%A4%E6%96%AD%EF%BC%9A"><span class="toc-number">4.1.1.</span> <span class="toc-text">数字型判断：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E5%88%A4%E6%96%AD%EF%BC%9A"><span class="toc-number">4.1.2.</span> <span class="toc-text">字符型判断：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get%E6%B3%A8%E5%85%A5%E4%B8%8Epsot%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">get注入与psot注入的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get%E6%96%B9%E6%B3%95"><span class="toc-number">5.0.1.</span> <span class="toc-text">get方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#post%E6%96%B9%E6%B3%95"><span class="toc-number">5.0.2.</span> <span class="toc-text">post方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#header%E6%B3%A8%E5%85%A5"><span class="toc-number">6.</span> <span class="toc-text">header注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFheader%E5%A4%B4"><span class="toc-number">6.1.</span> <span class="toc-text">什么是header头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Header%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="toc-number">6.2.</span> <span class="toc-text">Header注入原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFheader%E6%B3%A8%E5%85%A5"><span class="toc-number">6.2.1.</span> <span class="toc-text">什么是header注入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-%E6%B3%A8%E5%85%A5"><span class="toc-number">7.</span> <span class="toc-text">Cookie 注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="toc-number">8.</span> <span class="toc-text">搜索型注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="toc-number">8.1.</span> <span class="toc-text">搜索型注入原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E6%9E%84%E9%80%A0"><span class="toc-number">8.2.</span> <span class="toc-text">搜索型注入语句构造</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%9C%89%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">8.2.1.</span> <span class="toc-text">判断是否有注入漏洞</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-number">8.3.</span> <span class="toc-text">查询语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E6%B3%A8%E5%85%A5"><span class="toc-number">9.</span> <span class="toc-text">错误注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">10.</span> <span class="toc-text">联合查询注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">11.</span> <span class="toc-text">堆查询注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="toc-number">12.</span> <span class="toc-text">宽字节注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%B8%83%E5%B0%94%E7%9A%84%E7%9B%B2%E6%B3%A8"><span class="toc-number">13.</span> <span class="toc-text">基于布尔的盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E7%9A%84%E7%9B%B2%E6%B3%A8"><span class="toc-number">14.</span> <span class="toc-text">基于时间的盲注</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Sql注入漏洞利用及提权百科全书
+    </h1>
+
+
+
+    
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2022-05-15T16:31:12.000Z" itemprop="datePublished">2022-05-16</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" rel="tag">sql注入漏洞</a>, <a class="tag-link-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a>, <a class="tag-link-link" href="/tags/%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/" rel="tag">漏洞提权</a>
+        <span>| 阅读:</span>
+        <span id="busuanzi_container_page_pv">
+          <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+        
+    </div>
+
+
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>SQL 注入是一种将 SQL 代码插入或添加到应用（用户）的输入参数中，之后再将这些参数传递给后台的 SQL 服务器加以解析并执行的攻击。</li>
+</ul>
+<blockquote>
+<p>简单来说，网站程序存在可控传递参数，参数并未进行过滤，直接带入数据库查询了，导致攻击者可通过传递恶意参数sql语句代码进行攻击</p>
+</blockquote>
+<h2 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h2><p>当访问动态网页时, Web 服务器会向数据访问层发起 Sql 查询请求，如果权限验证通过就会执行 Sql 语句。<br>这种网站内部直接发送的Sql请求一般不会有危险，但实际情况是很多时候需要结合用户的输入数据动态构造 Sql 语句，如果用户输入的数据被构造成恶意 Sql 代码，Web 应用又未对动态构造的 Sql 语句使用的参数进行审查，则会带来意想不到的危险。Sql 注入带来的威胁主要有如下几点：</p>
+<ul>
+<li>猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
+<li>绕过认证，列如绕过验证登录网站后台。</li>
+<li>注入可以借助数据库的存储过程进行提权等操作</li>
+</ul>
+<h2 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h2><p>Sql注入分类可以按照参数类型分为数字型和字符型。还有一些常见的注入分类，例如：</p>
+<ul>
+<li>POST：注入字段位于POST数据中；</li>
+<li>Cookie：注入字段位于Cookie数据中；</li>
+<li>延时注入：根据数据库延时特性的注入</li>
+<li>搜索注入：注入字段在搜索的位置；</li>
+<li>base64注入：注入字符经过base64编码后注入；</li>
+<li>错误注入：基于数据库错误信息的响应注入；</li>
+<li>伪静态注入  news&#x2F;id&#x2F;46.html news.php?id&#x3D;46</li>
+</ul>
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/1.png" class="">
+
+<br>
+
+
+
+<h2 id="手工注入如何判断闭合方式"><a href="#手工注入如何判断闭合方式" class="headerlink" title="手工注入如何判断闭合方式"></a>手工注入如何判断闭合方式</h2><p>SQL语句的闭合形式大概如下几种：</p>
+<div class="highlight-wrap" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `users` <span class="keyword">WHERE</span> id<span class="operator">=</span> <span class="number">1</span>;       #整形闭合</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `users` <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span>;      #单引号闭合</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `users` <span class="keyword">WHERE</span> id<span class="operator">=</span>&quot;1&quot;;      #双引号闭合</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `users` <span class="keyword">WHERE</span> id<span class="operator">=</span>(<span class="string">&#x27;1&#x27;</span>);    #单引号加括号</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `users` <span class="keyword">WHERE</span> id<span class="operator">=</span>(&quot;1&quot;);    #双引号加括号</span><br></pre></td></tr></table></figure></div>
+
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/2.png" class="">
+
+<br>
+
+<blockquote>
+<p>可以看到我们给id传一个值，得到了其在数据库的内容，那我们怎么判断是什么闭合呢？多试！，因为大部分闭合无非就上面那几种</p>
+</blockquote>
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/3.png" class="">
+
+<br>
+
+<blockquote>
+<p>可以看到，1” 并没有让其闭合，那我们继续尝试其他的</p>
+</blockquote>
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/4.png" class="">
+
+<br>
+
+<blockquote>
+<p>当我们输入 1’ 时，报错了，说明我们成功让它闭合了</p>
+</blockquote>
+<br>
+
+<h3 id="判断是字符型注入还是数字型注入"><a href="#判断是字符型注入还是数字型注入" class="headerlink" title="判断是字符型注入还是数字型注入"></a>判断是字符型注入还是数字型注入</h3><p>通常 Sql 注入漏洞分为 2 种类型：数字型&amp;字符型<br>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分常用的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
+<br>
+
+<h4 id="数字型判断："><a href="#数字型判断：" class="headerlink" title="数字型判断："></a>数字型判断：</h4><p>当输入的参 x 为整型时，通常 abc.php 中 Sql 语句类型大致如下：<br>select * from &lt;表名&gt; where id &#x3D; x<br>这种类型可以使用经典的 and 1&#x3D;1 和 and 1&#x3D;2 来判断：<br>Url 地址中输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?id=">www.xxx.com/abc.php?id=</a> x and 1&#x3D;1<br>页面依旧运行正常，继续进行下一步。<br>Url 地址中继续输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?id=">www.xxx.com/abc.php?id=</a> x and 1&#x3D;2页面运行错误，则说明此 Sql 注入为数字型注入。<br>原因如下：当输入 and 1&#x3D;1时，后台执行 Sql 语句：<br>select * from &lt;表名&gt; where id &#x3D; x and 1&#x3D;1<br>没有语法错误且逻辑判断为正确，所以返回正常。<br>当输入 and 1&#x3D;2时，后台执行 Sql 语句：<br>select * from &lt;表名&gt; where id &#x3D; x and 1&#x3D;2<br>没有语法错误但是逻辑判断为假，所以返回错误。</p>
+<blockquote>
+<p>我们再使用假设法：如果这是字符型注入的话，我们输入以上语句之后应该出现如下情况：</p>
+<p>select from &lt;表名&gt; where id &#x3D; ‘x and 1&#x3D;1’select from &lt;表名&gt; where id &#x3D; ‘x and 1&#x3D;2’<br>查询语句将 and 语句全部转换为了字符串，并没有进行 and 的逻辑判断，所以不会出现以上结果，故假设是不成立的</p>
+</blockquote>
+<br>
+
+
+
+<h4 id="字符型判断："><a href="#字符型判断：" class="headerlink" title="字符型判断："></a>字符型判断：</h4><p>当输入的参 x 为字符型时，通常 abc.php 中 SQL 语句类型大致如下<br>select * from &lt;表名&gt; where id &#x3D; ‘x’<br>这种类型我们同样可以使用 and ‘1’&#x3D;’1 和 and ‘1’&#x3D;’2来判断：<br>Url 地址中输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?id=">www.xxx.com/abc.php?id=</a> x’ and ‘1’&#x3D;’1<br>页面运行正常，继续进行下一步。<br>Url 地址中继续输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?id=">www.xxx.com/abc.php?id=</a> x’ and ‘1’&#x3D;’2<br>页面运行错误，则说明此 Sql 注入为字符型注入。<br>原因如下：当输入 and ‘1’&#x3D;’1时，后台执行 Sql 语句：<br>select * from &lt;表名&gt; where id &#x3D; ‘x’ and ‘1’&#x3D;’1’<br>语法正确，逻辑判断正确，所以返回正确。<br>当输入 and ‘1’&#x3D;’2时，后台执行 Sql 语句：<br>select * from &lt;表名&gt; where id &#x3D; ‘x’ and ‘1’&#x3D;’2’<br>语法正确，但逻辑判断错误，所以返回错误。</p>
+<h2 id="get注入与psot注入的区别"><a href="#get注入与psot注入的区别" class="headerlink" title="get注入与psot注入的区别"></a>get注入与psot注入的区别</h2><blockquote>
+<p>两种注入的原理其实都大体相同，区别在与get与post的区别，那我们先来了解下这两者的区别</p>
+</blockquote>
+<p>　POST和GET是HTTP请求的两种方式，都可实现将数据从浏览器向服务器发送带参数的请求。</p>
+<h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><p>GET方法把参数通过key&#x2F;value形式存放在URL里面，如果参数是英文数字原样显示，如果是中文或者其他字符加密（Base64）URL长度一般有限制所以GET方法的参数长度不能太长。由于参数显示再地址栏所以不安全，一般需要保密的请求不使用GET。</p>
+<br>
+
+<h4 id="post方法"><a href="#post方法" class="headerlink" title="post方法"></a>post方法</h4><p>POST是邮件的意思，顾名思义就像一封信一样将参数放在信封里面传输。它用于修改服务器上的数据，一般这些数据是应该保密的，就像信件一样，信的内容只能收信的人看见。例入当用户输入账号和密码登录时账号和密码作为参数通过HTTP请求传输到服务器，这时候肯定不能用GET方法将账号密码直接显示在URL上，这时候就应该用POST方法保证数据的保密性。</p>
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/5.png" class="">
+
+<br>
+
+<p>抓到数据包</p>
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/6.png" class="">
+
+<br>
+
+<p>我们对其修改内容</p>
+<img src="/images/loading.gif" data-original="/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/7.png" class="">
+
+<br>
+
+
+
+
+
+
+
+<h2 id="header注入"><a href="#header注入" class="headerlink" title="header注入"></a>header注入</h2><br>
+
+
+
+<h3 id="什么是header头"><a href="#什么是header头" class="headerlink" title="什么是header头"></a>什么是header头</h3><p>通常HTTP消息包括客户机向服务器的请求消息和服务器向客户机的响应消息。这两种类型的消息由一个起始行，一个或者多个头域，一个只是头域结束的空行和可选的消息体组成。HTTP的头域包括通用头，请求头，响应头和实体头四个部分。每个头域由一个域名，冒号（:）和域值三部分组成。域名是大小写无关的，域值前可以添加任何数量的空格符，头域可以被扩展为多行，在每行开始处，使用至少一个空格或制表符。cookie也属于header头，如下：</p>
+<div class="highlight-wrap" data-rel="Http"><figure class="iseeu highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.baidu.com</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure></div>
+
+<br>
+
+<h3 id="Header注入原理"><a href="#Header注入原理" class="headerlink" title="Header注入原理"></a>Header注入原理</h3><h4 id="什么是header注入"><a href="#什么是header注入" class="headerlink" title="什么是header注入"></a>什么是header注入</h4><br>
+
+<p>Header注入，该注入是指利用后端验证客户端口信息（比如常用的cookie验证）或者通过Header中获取客户端的一些信息（比如User-Agent用户代理等其他Header字段信息），因为这些信息在某些地方是会和其他信息一起存储到数据库中，然后再在前台显示出来，又因为后台没有进过相对应的信息处理所以构成了sql注入</p>
+<p>参考这篇：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35569814/article/details/100185474">https://blog.csdn.net/qq_35569814/article/details/100185474</a></p>
+<br>
+
+
+
+<h2 id="Cookie-注入"><a href="#Cookie-注入" class="headerlink" title="Cookie 注入"></a>Cookie 注入</h2><p>HTTP 请求的时候会带上客户端的 Cookie, 注入点存在 Cookie 当中的某个字段中。</p>
+<br>
+
+<h2 id="搜索型注入"><a href="#搜索型注入" class="headerlink" title="搜索型注入"></a>搜索型注入</h2><br>
+
+<h3 id="搜索型注入原理"><a href="#搜索型注入原理" class="headerlink" title="搜索型注入原理"></a>搜索型注入原理</h3><p>语句如下：SELECT*from database.table where users like ‘%要查询的关键字%’。这里“%”匹配任何字符，“like”的意思就是像。比如我们在搜索框输入关键字“李”，那么SQL语句就变成了SELECT * from database.table where users like ‘%李%’，意思就是查询users列里的带有关键字“李”的数据。</p>
+<p>如果我们在输入关键字的时候不是输入的关键字“李”，而是精心构造的SQL语句，并且对于输入的关键字也没有过滤，那么注入就形成了。</p>
+<p>例如我们在搜索框输入 李%‘and’1’&#x3D;‘1’ and%’&#x3D;’</p>
+<div class="highlight-wrap" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> users <span class="keyword">like</span>’<span class="operator">%</span>李<span class="operator">%</span>‘<span class="keyword">and</span>’<span class="number">1</span>’<span class="operator">=</span>‘<span class="number">1</span>’<span class="keyword">and</span>’<span class="operator">%</span>’<span class="operator">=</span>’<span class="operator">%</span>’</span><br></pre></td></tr></table></figure></div>
+
+
+
+<br>
+
+<h3 id="搜索型注入语句构造"><a href="#搜索型注入语句构造" class="headerlink" title="搜索型注入语句构造"></a>搜索型注入语句构造</h3><br>
+
+<h4 id="判断是否有注入漏洞"><a href="#判断是否有注入漏洞" class="headerlink" title="判断是否有注入漏洞"></a>判断是否有注入漏洞</h4><p>Url 地址中输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?users=">www.xxx.com/abc.php?users=</a> 1‘ 报错，说明很有可能存在注入漏洞<br>Url 地址中输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?users=">www.xxx.com/abc.php?users=</a> 1% 报错，说明特别可能存在注入漏洞<br>Url 地址中输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?users=">www.xxx.com/abc.php?users=</a> 1% ‘and 1&#x3D;1 and ‘%’&#x3D;’ 正确<br>Url 地址中输入 <a target="_blank" rel="noopener" href="http://www.xxx.com/abc.php?users=">www.xxx.com/abc.php?users=</a> 1% ‘and 1&#x3D;2 and ‘%’&#x3D;’ 错误</p>
+<p>根据上面两条语句判断是否存在搜索型注入。<br>以下几种语句都可以</p>
+<div class="highlight-wrap" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">‘<span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>’</span><br><span class="line"></span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>–’</span><br><span class="line"></span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>’</span><br></pre></td></tr></table></figure></div>
+
+
+
+<br>
+
+<h3 id="查询语句"><a href="#查询语句" class="headerlink" title="查询语句"></a>查询语句</h3><div class="highlight-wrap" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="code"><pre><span class="line">判断字段数：</span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>‘</span><br><span class="line">判断字段显示位置：</span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>‘</span><br><span class="line">爆库名：</span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> database()),<span class="number">4</span>,<span class="number">5</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>‘</span><br><span class="line">爆表名：</span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables table_schema<span class="operator">=</span>‘database’),<span class="number">4</span>,<span class="number">5</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>‘</span><br><span class="line">爆数据：</span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> group_concat(column_name) <span class="keyword">from</span> information_schema.columns table_schema<span class="operator">=</span>‘database’ <span class="keyword">and</span> table_name<span class="operator">=</span>‘<span class="keyword">table</span>’),<span class="number">4</span>,<span class="number">5</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>‘</span><br><span class="line">爆字段：</span><br><span class="line"><span class="operator">%</span>’ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> group_concat(id，<span class="number">0x3a</span>,<span class="keyword">user</span>,<span class="number">0x3a</span>,passwd) <span class="keyword">from</span> database.table),<span class="number">4</span>,<span class="number">5</span> <span class="keyword">and</span> ‘<span class="operator">%</span>’<span class="operator">=</span>‘</span><br></pre></td></tr></table></figure></div>
+
+<br>
+
+
+
+
+
+<h2 id="错误注入"><a href="#错误注入" class="headerlink" title="错误注入"></a>错误注入</h2><p>参考这篇：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wangyuxiang946/article/details/123416521">https://blog.csdn.net/wangyuxiang946/article/details/123416521</a></p>
+<br>
+
+
+
+<h2 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h2><p>参考这篇：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/guoqingsentou/p/13488796.html">https://www.cnblogs.com/guoqingsentou/p/13488796.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42277564/article/details/80583959">https://blog.csdn.net/weixin_42277564/article/details/80583959</a></p>
+<br>
+
+
+
+<h2 id="堆查询注入"><a href="#堆查询注入" class="headerlink" title="堆查询注入"></a>堆查询注入</h2><p>参考这篇：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianggediyi/p/15595172.html">https://www.cnblogs.com/qianggediyi/p/15595172.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.codeprj.com/blog/d8cf8c1.html">https://www.codeprj.com/blog/d8cf8c1.html</a></p>
+<br>
+
+
+
+<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><p>参考这篇:</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/02SWD/p/15836051.html">https://www.cnblogs.com/02SWD/p/15836051.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/282252.html">https://www.freebuf.com/articles/network/282252.html</a></p>
+<br>
+
+
+
+
+
+<h2 id="基于布尔的盲注"><a href="#基于布尔的盲注" class="headerlink" title="基于布尔的盲注"></a>基于布尔的盲注</h2><p>参考这篇：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Z_l123/article/details/123005144">https://blog.csdn.net/Z_l123/article/details/123005144</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1632161">https://cloud.tencent.com/developer/article/1632161</a></p>
+<br>
+
+
+
+
+
+
+
+<h2 id="基于时间的盲注"><a href="#基于时间的盲注" class="headerlink" title="基于时间的盲注"></a>基于时间的盲注</h2><p>参考这篇：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38103658/article/details/100160609">https://blog.csdn.net/m0_38103658/article/details/100160609</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/askta0/p/9201840.html">https://www.cnblogs.com/askta0/p/9201840.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gjqhs/article/details/123020424">https://blog.csdn.net/Gjqhs/article/details/123020424</a></p>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B1%E5%AE%B3"><span class="toc-number">2.</span> <span class="toc-text">危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">SQL注入的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E9%97%AD%E5%90%88%E6%96%B9%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">手工注入如何判断闭合方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5%E8%BF%98%E6%98%AF%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="toc-number">4.1.</span> <span class="toc-text">判断是字符型注入还是数字型注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9E%8B%E5%88%A4%E6%96%AD%EF%BC%9A"><span class="toc-number">4.1.1.</span> <span class="toc-text">数字型判断：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E5%88%A4%E6%96%AD%EF%BC%9A"><span class="toc-number">4.1.2.</span> <span class="toc-text">字符型判断：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get%E6%B3%A8%E5%85%A5%E4%B8%8Epsot%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">get注入与psot注入的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get%E6%96%B9%E6%B3%95"><span class="toc-number">5.0.1.</span> <span class="toc-text">get方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#post%E6%96%B9%E6%B3%95"><span class="toc-number">5.0.2.</span> <span class="toc-text">post方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#header%E6%B3%A8%E5%85%A5"><span class="toc-number">6.</span> <span class="toc-text">header注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFheader%E5%A4%B4"><span class="toc-number">6.1.</span> <span class="toc-text">什么是header头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Header%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="toc-number">6.2.</span> <span class="toc-text">Header注入原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFheader%E6%B3%A8%E5%85%A5"><span class="toc-number">6.2.1.</span> <span class="toc-text">什么是header注入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-%E6%B3%A8%E5%85%A5"><span class="toc-number">7.</span> <span class="toc-text">Cookie 注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="toc-number">8.</span> <span class="toc-text">搜索型注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="toc-number">8.1.</span> <span class="toc-text">搜索型注入原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%9E%8B%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5%E6%9E%84%E9%80%A0"><span class="toc-number">8.2.</span> <span class="toc-text">搜索型注入语句构造</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%9C%89%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">8.2.1.</span> <span class="toc-text">判断是否有注入漏洞</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-number">8.3.</span> <span class="toc-text">查询语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E6%B3%A8%E5%85%A5"><span class="toc-number">9.</span> <span class="toc-text">错误注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">10.</span> <span class="toc-text">联合查询注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">11.</span> <span class="toc-text">堆查询注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="toc-number">12.</span> <span class="toc-text">宽字节注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%B8%83%E5%B0%94%E7%9A%84%E7%9B%B2%E6%B3%A8"><span class="toc-number">13.</span> <span class="toc-text">基于布尔的盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E7%9A%84%E7%9B%B2%E6%B3%A8"><span class="toc-number">14.</span> <span class="toc-text">基于时间的盲注</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <!-- <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&text=Sql注入漏洞利用及提权百科全书"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&is_video=false&description=Sql注入漏洞利用及提权百科全书"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sql注入漏洞利用及提权百科全书&body=Check out this article: http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&title=Sql注入漏洞利用及提权百科全书"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/05/16/Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E7%99%BE%E7%A7%91%E5%85%A8%E4%B9%A6/&name=Sql注入漏洞利用及提权百科全书&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul> -->
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Powered by Hopper
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </nav> 
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+  </div>
+</footer> 
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
+<!-- FancyBox -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<!-- <link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script> -->
+
+<!--pjax：防止跳转页面音乐暂停-->
+<!-- <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  -->
+
+
+

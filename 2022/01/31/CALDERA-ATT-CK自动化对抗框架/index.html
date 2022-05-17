@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Freebuff：CALDERA-ATT&amp;CK自动化对抗框架 “CALDERA” is a cyber security platform designed to easily automate adversary emulation, assist manual red-teams, and automate incident response. —— MITRE  0x00 关于CA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CALDERA-ATT&amp;CK自动化对抗框架">
+<meta property="og:url" content="http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Freebuff：CALDERA-ATT&amp;CK自动化对抗框架 “CALDERA” is a cyber security platform designed to easily automate adversary emulation, assist manual red-teams, and automate incident response. —— MITRE  0x00 关于CA">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220124/1643037573_61eec3859920974505077.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643040515_61eecf03d520887506f29.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643042408_61eed6681ff23b3df5de8.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643043210_61eed98a82aed2e7325b8.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643082398_61ef729e56a7d814ef588.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643086660_61ef83443468fb715ab0c.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643086840_61ef83f8e3307bc059507.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643086915_61ef84430ef684773448e.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643088058_61ef88ba90ff7725b3413.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643093093_61ef9c6558b7b994b305a.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643088156_61ef891c9aad9fe33c8de.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643089086_61ef8cbe36969e9b70616.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643091560_61ef966816aafd6da9f57.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643092129_61ef98a1a2d75f7e0a136.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643096983_61efab97c2aefb36fae7c.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643099675_61efb61bafbf787f09b47.gif!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643099862_61efb6d64a894425f8984.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643101057_61efbb81eb3691386c603.png!small">
+<meta property="og:image" content="https://image.3001.net/images/20220125/1643101132_61efbbcc2cedb8a5bf2b5.png!small">
+<meta property="article:published_time" content="2022-01-31T08:31:50.000Z">
+<meta property="article:modified_time" content="2022-04-16T14:13:47.983Z">
+<meta property="article:author" content="Powered by Hopper">
+<meta property="article:tag" content="红队攻防">
+<meta property="article:tag" content="ATT&amp;CK自动化工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CALDERA-ATT&amp;CK自动化对抗框架</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+
+
+
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <!-- <span id="nav"> -->
+      <!-- <ul>
+        <li><a href="/">主页</a></li>
+      </ul> -->
+      <!-- <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul> -->
+    <!-- </span> -->
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/05/07/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20PHP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/11/14/Python%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E5%AE%9E%E8%B7%B5/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <!-- <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li> -->
+        <!-- <i class="fas fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li><li><a class="icon" aria-label="切换主题"><i class="fas fa-lightbulb" aria-hidden="true" onmouseover='$("#i-switch").toggle()' onmouseout='$("#i-switch").toggle()' onclick="switchNightMode()"></i></a></li> -->
+        <li><a class="icon" aria-label="Back to home" href="/"><i class="fa fas fa-home" aria-hidden="true" onmouseover='$("#i-home").toggle()' onmouseout='$("#i-home").toggle()'></i></a></li>
+        <li><a class="icon" aria-label="some music" target="_blank" rel="noopener" href="http://www.lightyear.fm/"><i class="fa fa-solid fa-music" aria-hidden="true" onmouseover='$("#i-music").toggle()' onmouseout='$("#i-music").toggle()'></i></a></li>
+        <!-- <li><a class="icon" aria-label="切换主题"><i class="fa fa-solid fa-music" aria-hidden="true" onmouseover='$("#i-switch").toggle()' onmouseout='$("#i-switch").toggle()' onclick="switchNightMode()"></i></a></li> -->
+      </ul>   
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-home" class="info" style="display:none">Back to home</span>
+      <span id="i-music" class="info" style="display:none">some music</span>
+      <!-- <span id="i-switch" class="info" style="display:none">切换主题</span> -->
+      <!-- <span id="i-share" class="info" style="display:none;">Share post</span> -->
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <!-- <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&text=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&is_video=false&description=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CALDERA-ATT&amp;CK自动化对抗框架&body=Check out this article: http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&name=CALDERA-ATT&amp;CK自动化对抗框架&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul> -->
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-%E5%85%B3%E4%BA%8ECALDERA%E7%9A%84%E5%89%8D%E4%B8%96"><span class="toc-number">1.</span> <span class="toc-text">0x00 关于CALDERA的前世</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-%E5%85%B3%E4%BA%8ECALDERA%E7%9A%84%E7%BB%84%E6%88%90%E5%92%8C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">0x01 关于CALDERA的组成和原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-CALDERA%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">0x02 CALDERA环境的安装与功能介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CALDERA-%E5%AF%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">CALDERA 对环境配置要求：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8CCampaigns-%E6%B4%BB%E5%8A%A8%E6%A8%A1%E5%9D%97%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">一，Campaigns 活动模块：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8CPlugins-%E6%8F%92%E4%BB%B6%E6%A8%A1%E5%9D%97"><span class="toc-number">5.</span> <span class="toc-text">二，Plugins 插件模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CALDERA-%E7%9A%84%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">CALDERA 的插件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-CALDERA-%E7%9A%84%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83"><span class="toc-number">7.</span> <span class="toc-text">0x03 CALDERA 的实战演练</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CALDERA-ATT&amp;CK自动化对抗框架
+    </h1>
+
+
+
+    
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2022-01-31T08:31:50.000Z" itemprop="datePublished">2022-01-31</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/" rel="tag">ATT&CK自动化工具</a>, <a class="tag-link-link" href="/tags/%E7%BA%A2%E9%98%9F%E6%94%BB%E9%98%B2/" rel="tag">红队攻防</a>
+        <span>| 阅读:</span>
+        <span id="busuanzi_container_page_pv">
+          <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+        
+    </div>
+
+
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Freebuff：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/320837.html">CALDERA-ATT&amp;CK自动化对抗框架</a></p>
+<p>“CALDERA” is a cyber security platform designed to easily automate adversary emulation, assist manual red-teams, and automate incident response. —— MITRE</p>
+</blockquote>
+<h2 id="0x00-关于CALDERA的前世"><a href="#0x00-关于CALDERA的前世" class="headerlink" title="0x00 关于CALDERA的前世"></a><strong>0x00 关于CALDERA的前世</strong></h2><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220124/1643035827_61eebcb38bc1baa29ea8c.png!small" alt="img"></a></p>
+<p>最近几年关于ATT&amp;CK框架热度，简直是直冲云霄！谁都挡不住啊！那说到 ATT&amp;CK这个框架，就不得不提一下这个神秘的组织了——<a target="_blank" rel="noopener" href="https://www.mitre.org/">MITRE</a>，这个组织起源于二战时期的麻省理工学院（MIT）计算机实验室，成立于 1958 年，是一家非营利性公共，服务机构，为美国联邦政府提供工程和技术指导，包括国防情报、国土安全、网络安全、航空航天等等。而 ATT&amp;CK 来源于 MITRE 研究项目 FMX（2010 年）；当然我们熟知的 CVE 则由 MITRE 联合创始人 David E. Mannand Steven M. Christey 于 1999 年提出：《Towards a Common Enumeration of Vulnerabilities》，不得不说人家真牛啊！关于ATT&amp;CK框架的具体内容，这里就不做详细的介绍了，网上一大堆资源，自己去看看。</p>
+<p>CALDERA 这个框架也是 MITRE这个组织搞的，<a target="_blank" rel="noopener" href="https://caldera.readthedocs.io/en/latest/index.html">CALDERA</a>这个框架的英文全称为 ( Cyber Adversary Language and Decision Engine for Red Team Automation)，看不懂的兄弟们，没关系哈，简单点就是红队自动化工具，我们叫它 “<strong>破火山口</strong>“。到这里有的老哥们会说，红队测试的工具那么多，为啥这款如此的耀眼？别急 ! CALDERA 之所以牛，还在于 MITER 这个组织是基于 ATT&amp;CK 框架推出的<strong>网络安全红蓝对抗框架</strong>，它可用于<strong>自动化红队行动</strong>，<strong>手工红队行动</strong>，<strong>自动化应急响应</strong>等攻防实践，接近于<strong>APT攻击</strong> 的行为模式。本文将对CALDERA 做一个详细的介绍。</p>
+<h2 id="0x01-关于CALDERA的组成和原理"><a href="#0x01-关于CALDERA的组成和原理" class="headerlink" title="0x01 关于CALDERA的组成和原理"></a>0x01 关于CALDERA的组成和原理</h2><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220124/1643037573_61eec3859920974505077.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220124/1643037573_61eec3859920974505077.png!small" alt="img"></a></p>
+<p><strong>CALDERA</strong> 框架由两个组件组成，一个是核心部分，另一是插件部分。</p>
+<p><strong>核心部分</strong> 主要包括 C2 命令控制服务器，REST API 接口，WEB接口，而 <strong>插件部分</strong>不限于GUI接口，Access，Atomic，Compass，Gameboard，Response等。</p>
+<p>（不得不说一个好玩意儿，它是可以汇聚百川的资源，而插件部分就给了这个框架注入了持续不断的水源 ！）</p>
+<p>那它的实现原理是怎样的呢？别急，看下图：</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643040515_61eecf03d520887506f29.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643040515_61eecf03d520887506f29.png!small" alt="img"></a></p>
+<p><strong>C2 Server</strong> 即为安装运行 CALDERA 程序的服务器，<strong>默认开启 8888 端口</strong>进行监听；而 <strong>Agents</strong> 即为安装agent或shell 程序的主机，通过<strong>HTTP</strong>或 <strong>TCP****等</strong>网络协议会话与服务器进行通信。</p>
+<p><strong>Ability Adversary Operation Pliugins</strong> 中的 Ability 是一段具体的功能程序（<strong>TTPS</strong>）, 而 Adersary（<strong>Profile</strong>）是一系列 Ability 集合，Operation 则是针对特定组特定的 Adversary 实现。</p>
+<h2 id="0x02-CALDERA环境的安装与功能介绍"><a href="#0x02-CALDERA环境的安装与功能介绍" class="headerlink" title="0x02 CALDERA环境的安装与功能介绍"></a>0x02 CALDERA环境的安装与功能介绍</h2><p><a target="_blank" rel="noopener" href="https://github.com/mitre/caldera">Caldera项目地址：https://github.com/mitre/caldera</a></p>
+<h3 id="CALDERA-对环境配置要求："><a href="#CALDERA-对环境配置要求：" class="headerlink" title="CALDERA 对环境配置要求："></a><strong>CALDERA 对环境配置要求：</strong></h3><ol>
+<li><strong>操作系统： Linux 或 MacOS</strong></li>
+<li><strong>浏览器：   <a target="_blank" rel="noopener" href="https://chrome.xahuapu.net/">Chrome</a></strong></li>
+<li><strong>编程语言： <a target="_blank" rel="noopener" href="https://www.python.org/downloads/">Python 3.6.1 + （带有 PIP3)</a>，<a target="_blank" rel="noopener" href="https://golang.google.cn/dl/">GoLang 1.13+</a></strong></li>
+<li><strong>硬件要求： 8G 内存，双核 CPU （推荐）</strong></li>
+</ol>
+<blockquote>
+<p><strong>安装命令：</strong>    这里不推荐下载最新版，别问我为什么</p>
+</blockquote>
+<div class="highlight-wrap" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/mitre/caldera.git --branch <span class="number">3.1</span><span class="number">.0</span> </span><br><span class="line"></span><br><span class="line">cd caldera</span><br><span class="line"></span><br><span class="line">pip3 install -r requirements.txt</span><br><span class="line"></span><br><span class="line">python3 server.py --insecure</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+<p>可以看到如下页面，就已经成功了</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643042408_61eed6681ff23b3df5de8.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643042408_61eed6681ff23b3df5de8.png!small" alt="img"></a></p>
+<p>然后直接去浏览器访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:8888/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0">http://127.0.0.1:8888/就可以看到</a> CALDERA 的页面了</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643043210_61eed98a82aed2e7325b8.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643043210_61eed98a82aed2e7325b8.png!small" alt="img"></a></p>
+<p>登录页面默认有三个账号：</p>
+<table>
+<thead>
+<tr>
+<th>登录方</th>
+<th>用户名</th>
+<th>密码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Admin</td>
+<td>admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>red</td>
+<td>red</td>
+</tr>
+<tr>
+<td>Blue</td>
+<td>blue</td>
+<td>blue</td>
+</tr>
+</tbody></table>
+<p>登录上去后，就可以看到主页面了</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643082398_61ef729e56a7d814ef588.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643082398_61ef729e56a7d814ef588.png!small" alt="img"></a></p>
+<p>下面我们来看看 <strong>CALDERA</strong> 的功能</p>
+<p>大体上分为四个模块：<strong>Campaigns 活动模块，Plugins 插件模块 ，Advanced 高级模块，Administrative 管理模块</strong></p>
+<p>这里只介绍前两个主要模块</p>
+<h2 id="一，Campaigns-活动模块："><a href="#一，Campaigns-活动模块：" class="headerlink" title="一，Campaigns 活动模块："></a><strong>一，Campaigns 活动模块：</strong></h2><p>Campaigns 活动模块下又分为 3 个小模块：<strong>agents</strong>，<strong>adversaries（Abilities****）</strong>，<strong>operations</strong></p>
+<p><strong>agents 代理</strong></p>
+<p>代理 是在特定时间间隔连接回 CALDERA 以获取指令的软件程序。<strong>代理简单理解就是受害者方</strong>，代理通过最初在代理安装时定义的联系方法与 CALDERA 服务器进行通信。而已安装的代理出现在“代理”对话框的 <strong>UI</strong> 中。代理人通过他们独特的爪子或爪印来识别。</p>
+<p><strong>如何部署代理？看图：</strong></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643086660_61ef83443468fb715ab0c.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086660_61ef83443468fb715ab0c.png!small" alt="img"></a></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643086840_61ef83f8e3307bc059507.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086840_61ef83f8e3307bc059507.png!small" alt="img"></a></p>
+<p>CALDERA 包括许多代理程序，每个程序都添加了独特的功能，在部署代理的时候，直接选择相应的代理和平台。</p>
+<ol>
+<li>**Sandcat (54ndc47)**：一个 GoLang 代理，通过 SMB 联系人通过 HTTP、Git 或 P2P 进行通信</li>
+<li><strong>Manx</strong>：一个 GoLang 代理，它通过 TCP 联系人进行通信并充当反向 shell</li>
+<li><strong>Ragdoll</strong>：通过 HTML 联系人进行通信的 Python 代理</li>
+</ol>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643086915_61ef84430ef684773448e.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643086915_61ef84430ef684773448e.png!small" alt="img"></a></p>
+<p><strong>adversaries 对手，Abilities 能力</strong></p>
+<p><strong>对手</strong>是一组能力，代表了威胁参与者可用的战术、技术和程序 (TTP)。运行操作时使用对手配置文件来确定将执行哪些能力。</p>
+<p>而 <strong>能力</strong> 是一种特定的 ATT&amp;CK 战术&#x2F;技术实现，可以在运行的代理对象上执行。能力将包括要运行的命令、命令可以在其上运行的平台&#x2F;执行器（例如：Windows &#x2F; PowerShell）、要包含的有效负载以及对模块的引用以解析 CALDERA 服务器上的输出。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643088058_61ef88ba90ff7725b3413.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643088058_61ef88ba90ff7725b3413.png!small" alt="img"></a></h3><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643093093_61ef9c6558b7b994b305a.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643093093_61ef9c6558b7b994b305a.png!small" alt="img"></a></p>
+<p>选择一个战术后，旁边就会出现具体的战术行为，你可以自由选择你想做的事</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643088156_61ef891c9aad9fe33c8de.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643088156_61ef891c9aad9fe33c8de.png!small" alt="img"></a></p>
+<p><strong>operations 行动</strong></p>
+<p>如果想查看已操作过的代理对象，点击 Operations 来选择相应的代理对象进行查看</p>
+<p>如果想对一个新的代理对象进行操作，点击 VIEW , 取一个操作名字，并进行一些参数配置就可以run了</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643089086_61ef8cbe36969e9b70616.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643089086_61ef8cbe36969e9b70616.png!small" alt="img"></a></p>
+<h2 id="二，Plugins-插件模块"><a href="#二，Plugins-插件模块" class="headerlink" title="二，Plugins 插件模块"></a><strong>二，Plugins 插件模块</strong></h2><p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643091560_61ef966816aafd6da9f57.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643091560_61ef966816aafd6da9f57.png!small" alt="img"></a></p>
+<p><strong>（1）Access 插件</strong></p>
+<p>该插件允许从数据库中分配任何具有任何能力的代理。这个插件可以实现在数据库中以任何能力向任何代理对象分配任务，还可以进行初始化访问攻击</p>
+<p><strong>（2）Atomic 插件</strong></p>
+<p>Atomic 插件可以从官方的开源 GitHub 存储库中导入所有 Red Canary Atomic 测试。</p>
+<p><strong>（3）Compass 插件</strong> </p>
+<p>Compass 指南针插件用于在CALDERA 集成 Navigator 导航器，而且无需到导航器官网，即可自定义制作 ATT&amp;CK 矩阵图，也可以创建可视化以探索 TTP。按照以下步骤创建自己的个性可视化：</p>
+<ol>
+<li>单击“生成图层”</li>
+<li>单击“+”在导航器中打开一个新选项卡</li>
+<li>选择“打开现有图层”</li>
+<li>选择“从本地上传”并上传生成的图层文件</li>
+</ol>
+<p>Compass 还可以利用 ATT&amp;CK Navigator，更多信息请参见：<a target="_blank" rel="noopener" href="https://github.com/mitre-attack/attack-navigator">https</a>: <a target="_blank" rel="noopener" href="https://github.com/mitre-attack/attack-navigator">&#x2F;&#x2F;github.com&#x2F;mitre-attack&#x2F;attack-navigator</a></p>
+<p><strong>（4）Debrief 插件</strong></p>
+<p>Debrief 插件提供了一种为选定的一组操作收集整体活动信息和分析的方法。它提供操作元数据的集中视图和操作的图形显示、使用的技术和策略以及操作发现的事实。而且该插件还支持以 PDF 格式导出活动信息和分析。</p>
+<p><strong>（5）GameBoard 插件</strong></p>
+<p>这是一个比较有意思的插件模块，GameBoard 插件允许监控红蓝队的操作。游戏会跟踪双方的分数，并确定哪一方“获胜”。评分旨在量化蓝队产生的真&#x2F;假数量。当蓝队能够捕捉到红队的动作时，蓝队将获得积分奖励，而当蓝队无法正确捕捉时，红队将获得奖励。此外，能力会根据他们执行的策略获得不同数量的积分。</p>
+<p>要开始游戏键盘练习，首先以蓝色和用户部署代理。“自动收集”操作将自动执行。或者，如果愿意，可以使用蓝色代理开始不同的操作。登录为红色用户，并开始其他操作。从 GUI 中打开游戏板插件并选择这些新的相应的红色和蓝色操作来监控每个操作的点</p>
+<p><strong>（6）Manx 插件</strong></p>
+<p>终端插件为 CALDERA 添加了反向 shell 功能，以及一个名为 Manx 的基于 TCP 的代理。加载此插件后，将可以访问一个新的 GUI 页面，该页面允许在目标主机上放置反向 shell 并与主机手动交互，而且可以使用终端 GUI 页面上的终端模拟器与你的会话进行交互。</p>
+<p><strong>（7）Sandcat 插件</strong></p>
+<p>Sandcat 插件，也称为 54ndc47，是 CALDERA 附带的默认代理。54ndc47 是用 GoLang 编写的，以实现跨平台兼容性。54ndc47 代理需要网络连接到端口 8888 的 CALDERA</p>
+<p><strong>（8）Stockpile 插件</strong></p>
+<p>stockpile 插件为 CALDERA 添加了一些组件：</p>
+<ul>
+<li>Stockpile 库存插件描述了 CALDERA 框架当前所集成的能力数，配置脚本数等</li>
+</ul>
+<p>这些组件都是通过<code>plugins/stockpile/data/* </code>目录加载的。</p>
+<h2 id="CALDERA-的插件管理"><a href="#CALDERA-的插件管理" class="headerlink" title="CALDERA 的插件管理"></a><strong>CALDERA 的插件管理</strong></h2><p><strong>进行插件库</strong></p>
+<p>cd  &#x2F;Desktop&#x2F;caldera&#x2F;plugins&#x2F;</p>
+<p><strong>删除插件</strong></p>
+<p>rm -rf mock&#x2F;</p>
+<p><strong>下载插件</strong></p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/mitre/mock">https://github.com/mitre/mock</a></p>
+<p><strong>启用插件</strong>： <strong>Advanced</strong>—— <strong>Configuration —— Plugins 选择对应想激活的插件即可</strong></p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643092129_61ef98a1a2d75f7e0a136.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643092129_61ef98a1a2d75f7e0a136.png!small" alt="img"></a></p>
+<h2 id="0x03-CALDERA-的实战演练"><a href="#0x03-CALDERA-的实战演练" class="headerlink" title="0x03 CALDERA 的实战演练"></a><strong>0x03 CALDERA 的实战演练</strong></h2><p>首先生成自己攻击代码</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643096983_61efab97c2aefb36fae7c.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643096983_61efab97c2aefb36fae7c.png!small" alt="img"></a></p>
+<p>将这段代码结合图片混合，并做免杀，放到带有火绒的目标机上（ps：这里就不做详细演示了，网上有），我们模拟目标机打开查看这张gif图片</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643099675_61efb61bafbf787f09b47.gif!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643099675_61efb61bafbf787f09b47.gif!small" alt="img"></a></p>
+<p>看目标机是否通过 8888 端口返回给我们</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643099862_61efb6d64a894425f8984.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643099862_61efb6d64a894425f8984.png!small" alt="img"></a></p>
+<p>可以看到此时已经成功了！现在我们模拟一些红队间谍活动</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643101057_61efbb81eb3691386c603.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643101057_61efbb81eb3691386c603.png!small" alt="img"></a></p>
+<p>将这些信息以PDF格式导出</p>
+<p><a data-fancybox="gallery" data-src="https://image.3001.net/images/20220125/1643101132_61efbbcc2cedb8a5bf2b5.png!small" data-caption="img"><img src="/images/loading.gif" data-original="https://image.3001.net/images/20220125/1643101132_61efbbcc2cedb8a5bf2b5.png!small" alt="img"></a></p>
+<p>到这里模拟的前期间谍活动已经结束了</p>
+<p><strong>免责声明</strong>：本文提及的技术仅可用于私人学习测试等合法场景中，任何不当利用该技术所造成的刑事、民事责任均与本文作者无关</p>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-%E5%85%B3%E4%BA%8ECALDERA%E7%9A%84%E5%89%8D%E4%B8%96"><span class="toc-number">1.</span> <span class="toc-text">0x00 关于CALDERA的前世</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-%E5%85%B3%E4%BA%8ECALDERA%E7%9A%84%E7%BB%84%E6%88%90%E5%92%8C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">0x01 关于CALDERA的组成和原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-CALDERA%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">0x02 CALDERA环境的安装与功能介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CALDERA-%E5%AF%B9%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">CALDERA 对环境配置要求：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8CCampaigns-%E6%B4%BB%E5%8A%A8%E6%A8%A1%E5%9D%97%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">一，Campaigns 活动模块：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8CPlugins-%E6%8F%92%E4%BB%B6%E6%A8%A1%E5%9D%97"><span class="toc-number">5.</span> <span class="toc-text">二，Plugins 插件模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CALDERA-%E7%9A%84%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">CALDERA 的插件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-CALDERA-%E7%9A%84%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83"><span class="toc-number">7.</span> <span class="toc-text">0x03 CALDERA 的实战演练</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <!-- <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&text=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&is_video=false&description=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CALDERA-ATT&amp;CK自动化对抗框架&body=Check out this article: http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&title=CALDERA-ATT&amp;CK自动化对抗框架"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/01/31/CALDERA-ATT-CK%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E6%8A%97%E6%A1%86%E6%9E%B6/&name=CALDERA-ATT&amp;CK自动化对抗框架&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul> -->
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Powered by Hopper
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </nav> 
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+
+  </div>
+</footer> 
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
+<!-- FancyBox -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<!-- <link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script> -->
+
+<!--pjax：防止跳转页面音乐暂停-->
+<!-- <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>  -->
+
+
+
