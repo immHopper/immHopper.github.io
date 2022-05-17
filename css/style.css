@@ -1956,6 +1956,173 @@ header:nth-of-type(odd) {
 .info {
   width: 650px;
 }
+/* ==========================================================================
+Author's custom styles
+========================================================================== */
+/* homepage */
+#home-div > p {
+  padding-left: 20px;
+}
+#home-div > p,
+#home-div > ul {
+  margin-bottom: 25px;
+}
+#news {
+  overflow-y: auto;
+  max-height: 500px;
+  background-color: #282828;
+  padding: 10px 10px 0px 10px;
+  margin-bottom: 20px;
+}
+/* ranking table */
+#rank-table th,
+#rank-table td {
+  text-align: center;
+}
+#rank-table .comment {
+  word-break: break-all;
+  max-width: 420px;
+}
+#rank-table .name {
+  word-break: break-all;
+  max-width: 180px;
+}
+#rank-table tbody > tr {
+  cursor: pointer;
+}
+/* challenge */
+@media (min-width: 992px) {
+  #challenge-submit-log {
+    padding-left: 0;
+  }
+}
+#challenges {
+  margin-bottom: 20px;
+}
+#challenges ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#challenges li {
+  display: block;
+}
+#challenges .row {
+  margin-left: 3px;
+  margin-right: 5px;
+}
+#challenge-list {
+  width: 100%;
+}
+.challenge-entry {
+  width: 24%;
+  height: 150px;
+  margin: 0.5%;
+  float: left;
+  background-color: #282828;
+  box-shadow: inset 0 0 10px #3a3a3a;
+  cursor: pointer;
+  position: relative;
+}
+.challenge-entry:hover {
+  box-shadow: 0 0 10px #111;
+}
+@media (max-width: 768px) {
+  .challenge-entry {
+    width: 48%;
+  }
+}
+.locked {
+  cursor: default;
+}
+.challenge-info {
+  float: left;
+  width: 100%;
+  height: 150px;
+  padding: 8px 10px;
+  text-align: center;
+}
+.challenge-info .glyphicon-lock {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 80px;
+  color: #888;
+}
+.challenge-info .title {
+  display: table;
+  height: 100%;
+  width: 100%;
+  font-size: 1.4em;
+}
+.challenge-info .title p {
+  display: table-cell;
+  vertical-align: middle;
+  max-width: 145px;
+  word-wrap: break-word;
+}
+.challenge-info .title p .score {
+  font-size: 0.8em;
+}
+.flag-list {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+}
+.flag-list li {
+  background-color: #555;
+  margin: 5px 0;
+  padding: 3px 8px;
+  visibility: hidden;
+}
+.flag-list .solved {
+  background-color: #a56000;
+  visibility: visible;
+}
+.flag-list li:first-child {
+  margin-top: 10px;
+}
+.modal-dialog {
+  padding-top: 5%;
+}
+#challenge-description {
+  margin-bottom: 50px;
+}
+#submit-status {
+  margin-top: 8px;
+  text-align: left;
+}
+/* achievement */
+.achievement-badge {
+  height: 64px;
+  width: 64px;
+}
+.achievement-text {
+  padding-top: 10px;
+}
+/* Writeup editor fullscreen fix */
+.EasyMDEContainer .editor-toolbar.fullscreen,
+.EasyMDEContainer .CodeMirror-fullscreen,
+.EasyMDEContainer .editor-preview-side {
+  z-index: 2000;
+}
+/* scrollbar */
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #323232 #151515;
+}
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: #151515;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #323232;
+  border-radius: 20px;
+  border: 3px solid #151515;
+}
 @-moz-keyframes cursor {
   0% {
     opacity: 0;
