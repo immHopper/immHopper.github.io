@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言 好久没玩edusrc 老样子的登上去看了看证书 ，发现这几月证书上新了很多很好看的证书，于是此文便产生了，由于之前兑换过几个证书，没啥金币了，于是穷栓的我看上了 1金币的证书 ，在看了许久的证书后，最终瞄向了广西民族大学的证书  于是收集了一波信息，由于这个学校好像最近刚上新，大部分资产都基本被测试过了，在没结果的情况下，打算溜了 就在这时，无意间点入了该校的一个页面：  未授权访问这里随便">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次从未授权访问到垂直越权通杀">
+<meta property="og:url" content="http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/index.html">
+<meta property="og:site_name" content="PcHunter">
+<meta property="og:description" content="前言 好久没玩edusrc 老样子的登上去看了看证书 ，发现这几月证书上新了很多很好看的证书，于是此文便产生了，由于之前兑换过几个证书，没啥金币了，于是穷栓的我看上了 1金币的证书 ，在看了许久的证书后，最终瞄向了广西民族大学的证书  于是收集了一波信息，由于这个学校好像最近刚上新，大部分资产都基本被测试过了，在没结果的情况下，打算溜了 就在这时，无意间点入了该校的一个页面：  未授权访问这里随便">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:/Users/%E5%BC%A0%E6%9D%83/AppData/Roaming/Typora/typora-user-images/image-20220727152937911.png">
+<meta property="article:published_time" content="2022-07-01T06:58:25.000Z">
+<meta property="article:modified_time" content="2023-04-13T15:22:41.727Z">
+<meta property="article:author" content="瘦子先升">
+<meta property="article:tag" content="未授权访问">
+<meta property="article:tag" content="水平越权">
+<meta property="article:tag" content="垂直越权">
+<meta property="article:tag" content="通用漏洞">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/%E5%BC%A0%E6%9D%83/AppData/Roaming/Typora/typora-user-images/image-20220727152937911.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>记一次从未授权访问到垂直越权通杀</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="PcHunter" type="application/atom+xml" />
+    
+    <!-- umami web analytics -->
+    <script async defer data-website-id="ef8530fb-8585-46e1-aba4-f66f53625458" src="http://csl.cool:3000/umami.js"></script>
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body class="max-width mx-auto px3 ltr">
+    
+    <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/05/10/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%A9%E7%94%A8-POP%E9%93%BE%E6%9E%84%E9%80%A0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&text=记一次从未授权访问到垂直越权通杀"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&is_video=false&description=记一次从未授权访问到垂直越权通杀"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=记一次从未授权访问到垂直越权通杀&body=Check out this article: http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&name=记一次从未授权访问到垂直越权通杀&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&t=记一次从未授权访问到垂直越权通杀"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="toc-number">2.</span> <span class="toc-text">未授权访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E7%AE%A1%E7%90%86%E5%91%98"><span class="toc-number">3.</span> <span class="toc-text">垂直越权管理员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+      
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        记一次从未授权访问到垂直越权通杀
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">瘦子先升</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-07-01T06:58:25.000Z" itemprop="datePublished">2022-07-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83/" rel="tag">垂直越权</a>, <a class="tag-link-link" href="/tags/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/" rel="tag">未授权访问</a>, <a class="tag-link-link" href="/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/" rel="tag">水平越权</a>, <a class="tag-link-link" href="/tags/%E9%80%9A%E7%94%A8%E6%BC%8F%E6%B4%9E/" rel="tag">通用漏洞</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>好久没玩edusrc 老样子的登上去看了看证书 ，发现这几月证书上新了很多很好看的证书，于是此文便产生了，由于之前兑换过几个证书，没啥金币了，于是穷栓的我看上了 1金币的证书 ，在看了许久的证书后，最终瞄向了广西民族大学的证书</p>
+</blockquote>
+<p>于是收集了一波信息，由于这个学校好像最近刚上新，大部分资产都基本被测试过了，在没结果的情况下，打算溜了 就在这时，无意间点入了该校的一个页面：</p>
+<p><a data-fancybox="gallery" data-src="C:/Users/%E5%BC%A0%E6%9D%83/AppData/Roaming/Typora/typora-user-images/image-20220727152937911.png" data-caption="image-20220727152937911"><img src="C:/Users/%E5%BC%A0%E6%9D%83/AppData/Roaming/Typora/typora-user-images/image-20220727152937911.png" alt="image-20220727152937911"></a></p>
+<h2 id="未授权访问"><a href="#未授权访问" class="headerlink" title="未授权访问"></a>未授权访问</h2><p>这里随便注册一个邮箱和密码，抓包 ，可以明文看到自己的账号和密码，直接发包肯定不行，于是构造了一个空用户名去看看返回什么？</p>
+<br>
+
+
+
+<br>
+
+
+
+<p>返回包如下：</p>
+<br>
+
+
+
+<br>
+
+
+
+<p>看到这里，瞬间就知道了后面有戏了！！！ </p>
+<p>于是访问这个地址，直接到达后台了：</p>
+<br>
+
+
+
+<br>
+
+<p>看了下，这只是一个学生的账号，当然这里可以测试getshell ，本着逻辑漏洞去打穿，于是看下能不能垂直越权到管理员账号去？</p>
+<h2 id="垂直越权管理员"><a href="#垂直越权管理员" class="headerlink" title="垂直越权管理员"></a>垂直越权管理员</h2><p>经过测试发现后端并未对管理员的用户名做严格的验证，于是替换掉之前的数据包用户名，发包 果然和我想的一样，存在的管理员用户名，会和之前一样随机返回一个未知未授权地址</p>
+<br>
+
+
+
+<br>
+
+
+
+<p>于是再次拼接之前的数据包发包，垂直越权到后台管理员账号：</p>
+<br>
+
+
+
+<br>
+
+
+
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里已基本测试完了，后面发现这套系统漏洞挺多的，水平越权、垂直、getshell</p>
+<p>本到这已经结束了，突然一想，要不批量sou？  于是fofa一搜这套系统，居然有100来页，于是都简单的测试了下 50多个大学都拿下了，可能穷不是会员，只能到第七页，后面还是搞了个会员。。。</p>
+<p>换了2个证书，补天拿了一个证书和徽章（没有换广西民族的，没其他的好看）</p>
+<br>
+
+
+
+<br>
+
+
+
+<br>
+
+
+
+<br>
+
+
+
+
+
+<blockquote>
+<p>以上所述漏洞均已提交edusrc漏洞提交平台和补天平台，已修复</p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+<div>    
+  <ul class="post-copyright">
+     <li class="post-copyright-link">
+      <strong>本文作者：</strong>
+      <a href="/">瘦子先升</a>
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文标题：</strong>
+      <a href="{{ url_for(config.permalink) }}">
+    
+        <a class="" href="/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/">记一次从未授权访问到垂直越权通杀</a>
+        <div class="post-mark-list">
+    
+</div> 
+    
+
+
+</a>
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a title="记一次从未授权访问到垂直越权通杀">http://example.com/2022/07/01/记一次从未授权访问到垂直越权通杀/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本文由 瘦子先升 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" title="Attribution-NonCommercial-NoDerivatives 4.0 International" rel="license" target="_blank">CC BY-NC-ND 4.0</a>, 转载请保留以上声明信息！
+    </li>
+  </ul>
+</div>
+
+      
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="toc-number">2.</span> <span class="toc-text">未授权访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E7%AE%A1%E7%90%86%E5%91%98"><span class="toc-number">3.</span> <span class="toc-text">垂直越权管理员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&text=记一次从未授权访问到垂直越权通杀"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&is_video=false&description=记一次从未授权访问到垂直越权通杀"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=记一次从未授权访问到垂直越权通杀&body=Check out this article: http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&title=记一次从未授权访问到垂直越权通杀"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&name=记一次从未授权访问到垂直越权通杀&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/07/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BB%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%B0%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83%E9%80%9A%E6%9D%80/&t=记一次从未授权访问到垂直越权通杀"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+      <div id="end">
+    <img src="/images/post-end.png" alt="">
+</div> 
+      
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 瘦子先升
+    <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">京ICP备20001935号-1</a>
+    <div id="friend-link-container">
+      友情连接: 
+      
+    </div>
+  </div>
+  
+    <div class="footer-right">
+      <nav>
+        <ul>
+          
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/search/">Search</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/archives/">Archives</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      </ul>
+      </nav>
+    </div>
+  
+</footer>
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c2fdf3bebd0db8e40c37a4f37d76d33b";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+<!-- FancyBox -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  
+
+
+    
+  </body>
+
+  </html>
