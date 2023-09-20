@@ -471,7 +471,7 @@ body {
   color: #eee;
   font-display: swap;
   font-weight: 400;
-  font-size: 17px;
+  font-size: medium;
   font-family: "Main";
   line-height: 1.725;
   text-rendering: geometricPrecision;
