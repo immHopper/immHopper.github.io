@@ -1819,9 +1819,9 @@ article .content .caption {
   letter-spacing: 0;
 }
 #flip-card .card.blastoise .inner-card {
-  background-image: url("https://api.daily.dev/devcards/bafb206aa9db489ca6bc9d9c7f65adb0.png?r=wg3");
+  background-image: url("");
 }
-#flip-card .card .glare {
+.card .glare {
   content: '';
   position: absolute;
   top: 0;
@@ -1836,7 +1836,7 @@ article .content .caption {
   mix-blend-mode: hard-light;
   background: radial-gradient(circle at 50% 50%, #c7c6f3, transparent);
 }
-#flip-card .card .top-section {
+.card .top-section {
   background: linear-gradient(45deg, #cb3a3a, #3814ff);
   position: absolute;
   top: 0;
@@ -1846,16 +1846,16 @@ article .content .caption {
   height: 35%;
   z-index: 99;
 }
-#flip-card .user-2 .top-section {
+.user-2 .top-section {
   background: linear-gradient(45deg, #3a60cb, #14ffc8);
 }
-#flip-card .card .user-icon {
+.card .user-icon {
   position: absolute;
   left: calc(50% - 64px);
   top: calc(35% - 72px);
   z-index: 99;
 }
-#flip-card .card .user-icon img {
+.card .user-icon img {
   width: 128px;
   height: 128px;
   box-shadow: 0 4px 9px rgba(0,0,0,0.2);
@@ -1863,23 +1863,23 @@ article .content .caption {
   transform: scale(1);
   transition: all 0.1s ease-out;
 }
-#flip-card .card .user-icon img:hover {
+.card .user-icon img:hover {
   transform: scale(1.08);
 }
-#flip-card .card .glare {
+.card .glare {
   opacity: 0;
 }
-#flip-card .card.animated .glare {
+.card.animated .glare {
   opacity: 0.3;
 }
-#flip-card .card.animated.user .glare {
+.card.animated.user .glare {
   opacity: 0.15;
 }
-#flip-card .card .name {
+.card .name {
   color: #fff;
   font-size: 1.5rem;
 }
-#flip-card .card .bottom-section {
+.card .bottom-section {
   position: absolute;
   top: 35%;
   left: 0;
@@ -1890,13 +1890,13 @@ article .content .caption {
   padding-top: 64px;
   text-align: center;
 }
-#flip-card .bottom-section .area {
+.bottom-section .area {
   font-size: 1rem;
   opacity: 0.4;
   display: block;
   line-height: 1rem;
 }
-#flip-card .buttons {
+.buttons {
   float: left;
   width: calc(100% - 2rem);
   position: absolute;
@@ -1906,7 +1906,7 @@ article .content .caption {
   justify-content: center;
   left: 1rem;
 }
-#flip-card .buttons > a {
+.buttons > a {
   border: none;
   width: auto;
   background: #2d2d62;
@@ -1924,19 +1924,19 @@ article .content .caption {
   border-radius: 100px;
   text-decoration: none;
 }
-#flip-card .buttons .main {
+.buttons .main {
   background: #3d26e7;
 }
-#flip-card .buttons > .main:hover {
+.buttons > .main:hover {
   background: #614df1;
 }
-#flip-card .buttons > a:hover {
+.buttons > a:hover {
   background: #494989;
 }
-#flip-card .buttons .message svg {
+.buttons .message svg {
   margin: 0 0.5rem 0 0;
 }
-#flip-card .buttons .message {
+.buttons .message {
   margin: 0;
 }
 .highlight {
