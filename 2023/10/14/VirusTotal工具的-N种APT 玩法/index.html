@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="针对 VirusTotal 是什么？很多玩安全的人都很熟悉了，本文主要想讨论下，VirusTotal 在 针对一些 APT 前期行动中，如何发挥比较重要的作用  简述一下杀软的原理静态查杀： 研究人员需要去尝试找到该软件所具有的 独特指纹 ，并加入到杀毒软件的【特征库】中  所谓 独特指纹 当然是其它软件【不】包含该特征，只有这个恶意软件才会包含该特征  当杀毒软件扫描磁盘时，就是根据自带的【特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VirusTotal工具的-N种APT玩法">
+<meta property="og:url" content="http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/index.html">
+<meta property="og:site_name" content="PcRt">
+<meta property="og:description" content="针对 VirusTotal 是什么？很多玩安全的人都很熟悉了，本文主要想讨论下，VirusTotal 在 针对一些 APT 前期行动中，如何发挥比较重要的作用  简述一下杀软的原理静态查杀： 研究人员需要去尝试找到该软件所具有的 独特指纹 ，并加入到杀毒软件的【特征库】中  所谓 独特指纹 当然是其它软件【不】包含该特征，只有这个恶意软件才会包含该特征  当杀毒软件扫描磁盘时，就是根据自带的【特">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-14T09:47:56.000Z">
+<meta property="article:modified_time" content="2023-10-15T03:02:39.656Z">
+<meta property="article:author" content="瘦子先升">
+<meta property="article:tag" content="APT Attack">
+<meta property="article:tag" content="VirusTotalz">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>VirusTotal工具的-N种APT玩法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="PcRt" type="application/atom+xml" />
+    
+    <!-- umami web analytics -->
+    <script async defer data-website-id="ef8530fb-8585-46e1-aba4-f66f53625458" src="http://csl.cool:3000/umami.js"></script>
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body class="max-width mx-auto px3 ltr">
+    
+    <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/05/10/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%A9%E7%94%A8-POP%E9%93%BE%E6%9E%84%E9%80%A0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&text=VirusTotal工具的-N种APT玩法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&is_video=false&description=VirusTotal工具的-N种APT玩法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=VirusTotal工具的-N种APT玩法&body=Check out this article: http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&name=VirusTotal工具的-N种APT玩法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&t=VirusTotal工具的-N种APT玩法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E6%9D%80%E8%BD%AF%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">简述一下杀软的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VirusTotal-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">2.</span> <span class="toc-text">VirusTotal 的优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8C%96%E9%81%BF%E5%85%8D%E4%BA%86%E6%BC%8F%E6%8A%A5"><span class="toc-number">2.1.</span> <span class="toc-text">最大化避免了漏报</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E8%AF%AF%E6%8A%A5"><span class="toc-number">2.2.</span> <span class="toc-text">识别误报</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VirusTotal-%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">VirusTotal  不一样的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-VT-%E6%90%9C%E7%B4%A2%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">关于 VT 搜索关键字的类型</span></a></li></ol></li></ol>
+    </div>
+    <!-- <div id="toc">
+      <div id="toc-div" class="toc-article" >
+        
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E6%9D%80%E8%BD%AF%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">简述一下杀软的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VirusTotal-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">2.</span> <span class="toc-text">VirusTotal 的优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8C%96%E9%81%BF%E5%85%8D%E4%BA%86%E6%BC%8F%E6%8A%A5"><span class="toc-number">2.1.</span> <span class="toc-text">最大化避免了漏报</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E8%AF%AF%E6%8A%A5"><span class="toc-number">2.2.</span> <span class="toc-text">识别误报</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VirusTotal-%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">VirusTotal  不一样的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-VT-%E6%90%9C%E7%B4%A2%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">关于 VT 搜索关键字的类型</span></a></li></ol></li></ol>
+                
+      </div>
+    </div>  -->
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+      
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        VirusTotal工具的-N种APT玩法
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">瘦子先升</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-14T09:47:56.000Z" itemprop="datePublished">2023-10-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/APT/">APT</a> › <a class="category-link" href="/categories/APT/%E5%89%8D%E6%9C%9F%E6%8E%A2%E6%B5%8B/">前期探测</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/APT-Attack/" rel="tag">APT Attack</a>, <a class="tag-link-link" href="/tags/VirusTotalz/" rel="tag">VirusTotalz</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>针对 VirusTotal 是什么？很多玩安全的人都很熟悉了，本文主要想讨论下，VirusTotal 在 针对一些 APT 前期行动中，如何发挥比较重要的作用</p>
+</blockquote>
+<h2 id="简述一下杀软的原理"><a href="#简述一下杀软的原理" class="headerlink" title="简述一下杀软的原理"></a>简述一下杀软的原理</h2><p>静态查杀： 研究人员需要去尝试找到该软件所具有的 <strong>独特指纹</strong> ，并加入到杀毒软件的【特征库】中</p>
+<blockquote>
+<p>所谓 <strong>独特指纹</strong> 当然是其它软件【不】包含该特征，只有这个恶意软件才会包含该特征</p>
+</blockquote>
+<p>当杀毒软件扫描磁盘时，就是根据自带的【特征库】进行检查，如果某个文件正好包含了【特征库】中“某某恶意软件”的特征，就会触发报警。</p>
+<p>动态查杀：一般来说，恶意软件总是会有一些比较奇怪的（反常的）行为。因此，杀毒软件会根据某个软件的行为，来判断其是否具有恶意。</p>
+<blockquote>
+<p>上面还是会有漏报，比如一款全新的恶意软件，在行为方面足够隐蔽，它还可以躲过“行为分析”。在这种情况下，杀软就会出现漏报</p>
+</blockquote>
+<h2 id="VirusTotal-的优势"><a href="#VirusTotal-的优势" class="headerlink" title="VirusTotal 的优势"></a>VirusTotal 的优势</h2><p>相比传统的杀毒软件，VirusTotal 具有完全不同的玩法——它自己并不研发杀软。</p>
+<p>它的玩法是——把全球各种杀毒软件汇总到它的服务器上，然后提供一个 Web 界面给你使用。你如果怀疑某个文件有问题，可以把这个可疑的文件提交到它的网站上进行扫描。然后 VirusTotal 会告诉你，全球各大杀毒软件对这个文件的扫描结果，让你参考。</p>
+<ol>
+<li><h3 id="最大化避免了漏报"><a href="#最大化避免了漏报" class="headerlink" title="最大化避免了漏报"></a>最大化避免了漏报</h3><p>由于 VirusTotal 汇总了全球所有主流&#x2F;知名的杀毒软件；因此，最大程度的降低了漏报</p>
+<blockquote>
+<p>虽然 VirusTotal 汇总了全球主流的杀毒软件，它依然不是全能的。依然有可能出现某个恶意软件，VT 上所有的引擎都没查出来，即全部漏报</p>
+</blockquote>
+</li>
+<li><h3 id="识别误报"><a href="#识别误报" class="headerlink" title="识别误报"></a>识别误报</h3><p>由于 VirusTotal 汇总了全球所有主流&#x2F;知名的杀毒软件，这么多杀毒软件，不可能同时都对同一个文件产生误报。因此，VirusTotal有助于帮你判断，某个文件的“报毒”到底是不是误报</p>
+<blockquote>
+<p>由于被 Google 收购 ，可以获得更好的基础设施，能上传更大的文件，而且扫描速度会更快等等</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="VirusTotal-不一样的利用"><a href="#VirusTotal-不一样的利用" class="headerlink" title="VirusTotal  不一样的利用"></a>VirusTotal  不一样的利用</h2><blockquote>
+<p>如果你提交的文件是首次提交（也就是之前没人提交过同样的文件），那么当你上传之后，VirusTotal 会立即进行一次扫描，反之，如果你提交的文件，之前已经有人提交过，那么 VirusTotal  不会进行扫描，而是直接显示最后一次扫描结果</p>
+</blockquote>
+<p>那么 VT 是如何判断两个文件是相同文件呢？</p>
+<p>主要是VT 根据散列算法（SHA256） 判断文件是否相同，当你想要上传某个文件时，VT 界面上的 JS 代码会先在你本机计算该文件的 SHA256 散列值，然后拿计算结果去 VT 网站的数据库进行查找，如果这个散列值&#x2F;哈希值已经存在，说明相同的文件曾经被上传过，就不需要重新上传，直接跳到“最后一次扫描结果”的界面。</p>
+<h3 id="关于-VT-搜索关键字的类型"><a href="#关于-VT-搜索关键字的类型" class="headerlink" title="关于 VT 搜索关键字的类型"></a>关于 VT 搜索关键字的类型</h3><p>大体上分为以下几种：</p>
+<ol>
+<li>散列值（针对文件，散列值可以是：SHA256、SHA1、MD5）</li>
+<li>网址（针对网站）</li>
+<li>域名（针对网站）</li>
+</ol>
+<blockquote>
+<p>如果针对是高价值的目标，那么探测对方的安全防范意识是极其重要的</p>
+</blockquote>
+<p>为了判断对方是否习惯于使用 VT，你可以先用某种方式（邮件等）让对方得到一个完全无害的文件，并且该文件是全新的。如果你的攻击目标在得到该文件之后，上传到 VT 进行扫描，就会在 VT 上留下一个扫描历史。</p>
+<p>作为攻击者，只要定期去 VT 查询该文件的散列值，就能判断出：对方拿到该文件之后，有没有提交到 VT 进行扫描。从而判断出：对方的“安全防范意识”是否足够高，从而为下一步的高级攻击做准备</p>
+<blockquote>
+<p>当然基于此，还可以不断发散思维</p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+<div>    
+  <ul class="post-copyright">
+     <li class="post-copyright-link">
+      <strong>本文作者：</strong>
+      <a href="/">瘦子先升</a>
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文标题：</strong>
+      <a href="{{ url_for(config.permalink) }}">
+    
+        <a class="" href="/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/">VirusTotal工具的-N种APT玩法</a>
+        <div class="post-mark-list">
+    
+</div> 
+    
+
+
+</a>
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a title="VirusTotal工具的-N种APT玩法">http://example.com/2023/10/14/VirusTotal工具的-N种APT 玩法/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本文由 瘦子先升 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" title="Attribution-NonCommercial-NoDerivatives 4.0 International" rel="license" target="_blank">CC BY-NC-ND 4.0</a>, 转载请保留以上声明信息！
+    </li>
+  </ul>
+</div>
+
+      
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E6%9D%80%E8%BD%AF%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">简述一下杀软的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VirusTotal-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">2.</span> <span class="toc-text">VirusTotal 的优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8C%96%E9%81%BF%E5%85%8D%E4%BA%86%E6%BC%8F%E6%8A%A5"><span class="toc-number">2.1.</span> <span class="toc-text">最大化避免了漏报</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E8%AF%AF%E6%8A%A5"><span class="toc-number">2.2.</span> <span class="toc-text">识别误报</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VirusTotal-%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">VirusTotal  不一样的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-VT-%E6%90%9C%E7%B4%A2%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">关于 VT 搜索关键字的类型</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&text=VirusTotal工具的-N种APT玩法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&is_video=false&description=VirusTotal工具的-N种APT玩法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=VirusTotal工具的-N种APT玩法&body=Check out this article: http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&title=VirusTotal工具的-N种APT玩法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&name=VirusTotal工具的-N种APT玩法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/10/14/VirusTotal%E5%B7%A5%E5%85%B7%E7%9A%84-N%E7%A7%8DAPT%20%E7%8E%A9%E6%B3%95/&t=VirusTotal工具的-N种APT玩法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+      <div id="end">
+    <img src="/images/post-end.png" alt="">
+</div> 
+      
+      <div id='valine'>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            notify: true,
+            verify: true,
+            appId: '7zw6tQBddCfPvbaVtBGxUy0G-gzGzoHsz',
+            appKey: 'voPGHhBz7MozpUm0Fq2AMFmv',
+            placeholder: '想说点啥...',
+            avatar: 'monsterid',           
+        })
+    </script>
+</div>
+      
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 瘦子先升
+    <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/"></a>
+    <div id="friend-link-container"> 
+      
+    </div>
+  </div>
+  
+    <div class="footer-right">
+      <nav>
+        <ul>
+          
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/search/">Search</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/archives/">Archives</a></li>
+      
+      </ul>
+      </nav>
+    </div>
+  
+</footer>
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c2fdf3bebd0db8e40c37a4f37d76d33b";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+<!-- FancyBox -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+  
+
+
+    
+  </body>
+
+  </html>
