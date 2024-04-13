@@ -321,7 +321,7 @@ body .h1 {
   display: block;
   margin-top: 3rem;
   margin-bottom: 1rem;
-  color: #2bbc8a;
+  color: #c3dbe8;
   letter-spacing: 0.01em;
   font-weight: 700;
   font-style: normal;
@@ -616,7 +616,7 @@ body {
   -webkit-filter: grayscale(100%);
 }
 #header #nav {
-  color: #2bbc8a;
+  color: #c3dbe8;
   letter-spacing: 0.01em;
   font-weight: 200;
   font-style: normal;
@@ -630,10 +630,10 @@ body {
 }
 #header #nav ul a {
   margin-right: 15px;
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #header #nav ul a:hover {
-  background-image: linear-gradient(transparent, transparent 5px, #2bbc8a 5px, #2bbc8a);
+  background-image: linear-gradient(transparent, transparent 5px, #c3dbe8 5px, #c3dbe8);
   background-position: bottom;
   background-size: 100% 6px;
   background-repeat: repeat-x;
@@ -642,7 +642,7 @@ body {
   display: inline-block;
   margin-right: 15px;
   border-right: 1px dotted;
-  border-color: #2bbc8a;
+  border-color: #c3dbe8;
   vertical-align: middle;
 }
 #header #nav ul .icon {
@@ -733,7 +733,7 @@ body {
   margin-left: 15px;
 }
 #header-post #menu-icon:hover {
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #header-post #menu-icon-tablet {
   float: right;
@@ -741,7 +741,7 @@ body {
   margin-left: 15px;
 }
 #header-post #menu-icon-tablet:hover {
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #header-post #top-icon-tablet {
   position: fixed;
@@ -751,17 +751,17 @@ body {
   margin-left: 15px;
 }
 #header-post #top-icon-tablet:hover {
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #header-post .active {
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #header-post #menu {
   visibility: hidden;
   margin-right: 2rem;
 }
 #header-post #nav {
-  color: #2bbc8a;
+  color: #c3dbe8;
   letter-spacing: 0.01em;
   font-weight: 200;
   font-style: normal;
@@ -772,16 +772,16 @@ body {
 }
 #header-post #nav ul a {
   margin-right: 15px;
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #header-post #nav ul a:hover {
-  background-image: linear-gradient(transparent, transparent 5px, #2bbc8a 5px, #2bbc8a);
+  background-image: linear-gradient(transparent, transparent 5px, #c3dbe8 5px, #c3dbe8);
   background-position: bottom;
   background-size: 100% 6px;
   background-repeat: repeat-x;
 }
 #header-post #nav ul li {
-  border-right: 1px dotted #2bbc8a;
+  border-right: 1px dotted #c3dbe8;
 }
 #header-post #nav ul li:last-child {
   margin-right: 0;
@@ -835,7 +835,7 @@ body {
   font-size: 0.8rem;
 }
 #header-post #toc .toc-level-2:before {
-  color: #2bbc8a;
+  color: #c3dbe8;
   content: "#";
 }
 #header-post #toc .toc-level-3 {
@@ -933,11 +933,11 @@ body {
   text-align: center;
 }
 #footer-post #nav-footer a {
-  color: #2bbc8a;
+  color: #c3dbe8;
   font-size: 1em;
 }
 #footer-post #nav-footer a:hover {
-  background-image: linear-gradient(transparent, transparent 5px, #2bbc8a 5px, #2bbc8a);
+  background-image: linear-gradient(transparent, transparent 5px, #c3dbe8 5px, #c3dbe8);
   background-position: bottom;
   background-size: 100% 6px;
   background-repeat: repeat-x;
@@ -968,7 +968,7 @@ body {
 #footer-post #actions-footer a {
   display: inline-block;
   padding-left: 1rem;
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 #footer-post #share-footer {
   padding-right: 1rem;
@@ -1015,7 +1015,7 @@ body {
   font-size: 0.8rem;
 }
 #footer-post #toc-footer .toc-level-2:before {
-  color: #2bbc8a;
+  color: #c3dbe8;
   content: "#";
 }
 #footer-post #toc-footer .toc-level-3 {
@@ -1132,7 +1132,7 @@ article header .postdate {
 article .content h2:before {
   position: absolute;
   left: -1.2rem;
-  color: #2bbc8a;
+  color: #c3dbe8;
   content: "#";
   font-weight: bold;
   font-size: 1.2rem;
@@ -1387,7 +1387,7 @@ article .content .caption {
   line-height: 3rem;
 }
 .search-input:focus {
-  border: solid 1px #2bbc8a;
+  border: solid 1px #c3dbe8;
 }
 #search-result ul.search-result-list {
   padding: 0;
@@ -1573,7 +1573,7 @@ article .content .caption {
   background-image: linear-gradient(transparent, transparent 5px, #323539, 5px, #323539) !important;
 }
 #valine #vcomments .vlist .vh .vcontent a:hover {
-  color: #2bbc8a !important;
+  color: #c3dbe8 !important;
 }
 #valine #vcomments .vlist .vquote {
   border-left-color: #323539 !important;
@@ -1623,7 +1623,7 @@ article .content .caption {
 }
 #about .section .header {
   height: 50px;
-  color: #2bbc8a;
+  color: #c3dbe8;
   font-size: 1.1rem;
   font-weight: bold;
 }
@@ -1641,7 +1641,7 @@ article .content .caption {
 #about .section .box .tip {
   width: 200px;
   pointer-events: none;
-  color: #2bbc8a;
+  color: #c3dbe8;
   background-color: #1c222d;
   text-align: center;
   border-radius: 6px;
@@ -2020,7 +2020,7 @@ code {
   padding: 0 5px;
   border-radius: 2px;
   font-family: "Code", monospace;
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 subcontent {
   color: #808080;
@@ -2075,7 +2075,7 @@ subcontent {
   transition: opacity 0.2s ease-in;
 }
 .highlight .btn-copy:hover {
-  color: #2bbc8a;
+  color: #c3dbe8;
 }
 .highlight pre {
   margin: 0;
